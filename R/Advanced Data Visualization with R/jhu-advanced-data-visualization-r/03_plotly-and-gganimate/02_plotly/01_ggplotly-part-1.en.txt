@@ -1,0 +1,45 @@
+Plotly is a package of powerful
+visualization tools to use with R. And in many respects, Plotly is an alternative to ggplot with
+a relatively easy to learn syntax for generating many of the same kinds of plots
+that we've created so far in this course. Plotly is also notable for how easy it is to make figures
+interactive using this tool. With Plotly, and especially in
+conjunction Shiny and flexdashboards, you can replicate many of
+the interactive figures of visualization software
+like Tableau using R. If you really want to maximize
+your visualization skills using R, you should take the time to
+learn Plotly in its entirety. And with what we've learned so far,
+it shouldn't be especially difficult for you to transfer your knowledge about how
+to code in R to use this new package. However, in this course, we just don't
+have time to cover everything, so we prioritize ggplot over Plotly. The best resources for
+learning Plotly are online. Carson Sievert has a textbook that you
+can purchase that provides a really nice introduction. And there's a free version of this
+available online at plotly-r.com. There's also a great set of reference
+materials available at plotly.com. If you have time,
+it's a great idea to learn to use Plotly, drawing on skills you
+developed in this class. Fortunately though, you don't have to
+learn all of Plotly in order to make use of it and to improve the visualizations
+that we've created in GG plot. Plotly has a special function that
+interacts with ggplot figures to make those figures interactive, and
+appropriately, it's called ggplotly. The basic usage of ggplotly is very easy. And all you have to do is create
+a ggplot figure and then take it and use it within the ggplot function in order
+to use the special tools of ggplotly. So let me show you how to do that. Follow along with the R code that's
+associated with this video, and I'm using an adapting code
+here from plotly.com. First, you install the libraries that we
+need and load those up, and then here, I'm going to make some fake data,
+pulling data from a normal distribution. This is what we've seen in the past. We'll make a really simple
+scatter plot using ggplot and save that to the object
+p into R environment. And from there, we just wrapped that
+function ggplotly around the ggplot object that we've created, and
+we say that to the object fig. Now if you run fig in RStudio,
+you'll get the ggplot figure, but with the extra bells and
+whistles of Plotly. Now we see that if we hover
+the cursor over a data point, we'll get a pop up box that
+displays data about that point. And you'll see that the plot
+includes zooming and panning functions that you don't have
+with a traditional static ggplot figure. You can follow this exact same approach
+for many different ggplot figures. And it's worthwhile to spend some time
+playing with line charts, bar charts, heat maps, and the other kinds of figures
+that we've created in the course so far. And to see what kind of interactivity
+comes up when you feed the ggplotly function a ggplot figure. You can also go and make all the same
+kinds of aesthetic tweaks that we've done before, changing labels and colors, and that sort of thing within the ggplot
+figure before you feed it into ggplotly.

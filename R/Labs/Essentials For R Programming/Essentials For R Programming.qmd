@@ -1,0 +1,513 @@
+---
+title: "Essentials For R Programming"
+author: "ryannthegeek"
+date: last-modified
+date-format: iso
+format:
+  pdf:
+    documentclass: article
+    classoption: [12pt, a4paper, twoside, openright]
+    toc: true
+    toc-title: Contents
+    toc-depth: 4
+    toccolor: blue
+    number-sections: true
+    number-depth: 3
+    lof: true
+    lot: true
+    fig-format: png
+    fig-pos: H
+    urlcolor: purple
+    colorlinks: true
+    linkcolor: purple
+    filecolor: magenta
+    listings: true
+    include-in-header: 
+      - D:\Chege Learners' Hub\quarto learning\listsetR.tex
+      - D:\Chege Learners' Hub\quarto learning\contactdets.tex
+    latex-auto-install: true
+    output-file: Essentials For R Programming
+editor: visual
+execute: 
+  warning: false
+  error: false
+  cache: false
+  freeze: auto
+---
+
+```{=tex}
+\cleardoublepage
+\pagenumbering{arabic}
+\pagestyle{fancy}
+```
+# Introduction and Preliminaries
+
+```{r}
+x <- 1:5
+ls() ## lists objects formed
+rm(x) ## remove objects formed
+```
+
+# Simple Manipulations; Numbers and Vectors
+
+To set up a vector named x consisting of five numbers, namely $10.4, 5.6, 3.1, 6.4$ and $21.7$, use the R command
+
+```{r}
+x <- c(10.4, 5.6, 3.1, 6.4, 21.7)
+```
+
+Assignment can also be made using the function `assign()`. An equivalent way of making the same assignment as above is with:
+
+```{r}
+assign("x", c(10.4, 5.6, 3.1, 6.4, 21.7))
+```
+
+All of the common arithmetic functions are available:
+
+```{r}
+#| eval: false
+
+log()
+exp()
+sin()
+cos()
+tan()
+sqrt()
+```
+
+## Logical vectors
+
+The logical operators are:
+
+```{r}
+#| eval: false
+
+<
+<=
+>
+>=
+== # equivalent to.
+!=  # inequality.
+```
+
+In addition if `c1` and `c2` are logical expressions, then `c1 & c2` is their intersection \textcolor{green}{and}, on the other hand, `c1 | c2` is their union \textcolor{blue}{or}, and `!c1` is the \textcolor{red}{negation} of `c1`.
+
+## Index vectors; selecting and modifying subsets of a data set
+
+```{r}
+y <- x[!is.na(x)] # creates (or re-creates) an object y which will contain the non-missing values of x, in the same order
+
+(x + 1)[(!is.na(x)) & x > 0] -> z # creates an object z and places in it the values of the vector x+1 for which the corresponding value in x was both non-missing and positive
+
+x[is.na(x)] <- 0 # replaces any missing values in x by zeros and
+y[y < 0] <- -y[y < 0] # has the same effect as 
+y <- abs(y)
+```
+
+# Objects, their Modes and Attributes
+
+## Getting and setting attributes
+
+The function `attributes(object)` returns a list of all the non-intrinsic attributes currently defined for that object. The function `attr(object, name)` can be used to select a specific attribute.
+
+```{r}
+#| eval: false
+
+attr(z, "dim") <- c(10,10) # allows R to treat z as if it were a 10-by-10 matrix
+```
+
+# Ordered and Non-ordered Factors
+
+## A specific example
+
+Suppose, for example, we have a sample of $30$ tax accountants from all the states and territories of Australia1 and their individual state of origin is specified by a character vector of state mnemonics as:
+
+```{r}
+state <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa",
+           "qld", "vic", "nsw", "vic", "qld", "qld", "sa", "tas",
+           "sa", "nt", "wa", "vic", "qld", "nsw", "nsw", "wa",
+           "sa", "act", "nsw", "vic", "vic", "act")
+
+## A factor is created using the factor() function:
+statef <- factor(state)
+```
+
+## The function `tapply()` and ragged arrays
+
+Suppose we have the incomes of the same tax accountants in another vector (in suitably large units of money)
+
+```{r}
+incomes <- c(60, 49, 40, 61, 64, 60, 59, 54, 62, 69, 70, 42, 56,
+             61, 61, 61, 58, 51, 48, 65, 49, 49, 41, 48, 52, 46,
+             59, 46, 58, 43)
+```
+
+To calculate the sample mean income for each state we can now use the special function `tapply()`:
+
+```{r}
+incmeans <- tapply(incomes, statef, mean);incmeans
+```
+
+The function `tapply()` is used to apply a function, here `mean()`, to each group of components of the first argument, here incomes, defined by the levels of the second component, here $statef2$, as if they were separate vector structures.
+
+Suppose further we needed to calculate the standard errors of the state income means. To do this we need to write an R function to calculate the **standard error** for any given vector.
+
+```{r}
+stdError <- function(x) sqrt(var(x)/length(x))
+
+## After this assignment, the standard errors are calculated by
+incster <- tapply(incomes, statef, stdError);incster
+```
+
+## Frequency tables from factors
+
+The function `table()` allows frequency tables to be calculated from equal length factors. If there are $k$ factor arguments, the result is a $k-way$ array of frequencies.
+
+```{r}
+statefr <- table(statef) # gives in statefr a table of frequencies of each state in the sample
+```
+
+The frequencies are ordered and labelled by the levels attribute of the factor. Further suppose that \textcolor{blue}{incomef} is a factor giving a suitably defined \textcolor{purple}{income class} for each entry in the data vector, for example with the `cut()` function:
+
+```{r}
+ factor(cut(incomes, breaks = 35 + 10*(0:7))) -> incomef
+# Then to calculate a two-way table of frequencies:
+table(incomef, statef)
+```
+
+# Arrays and Matrices
+
+## Arrays
+
+An array can be considered as a multiply sub scripted collection of data entries, for example numeric.
+
+A dimension vector is a vector of non-negative integers. If its length is $4$ then the array is $k-dimensional$, e.g. a matrix is a $2-dimensional$ array. The dimensions are indexed from one up to the values given in the dimension vector.
+
+## Index matrices
+
+Suppose for example;
+
+we have a 4 by 5 array X and we wish to do the following:
+
+1.  Extract elements `X[1,3]`, `X[2,2]` and `X[3,1]` as a vector structure.
+
+2.  Replace these entries in the array X by zeroes.
+
+In this case we need a 3 by 2 subscript array, as in the following example
+
+```{r}
+x <- array(1:20, dim = c(4, 5));x # Generate a 4 by 5 array
+
+i <- array(c(1:3,3:1), dim = c(3, 2));i # i is a 3 by 2 index array.
+
+x[i] # Extract those elements
+
+x[i] <- 0;x # Replace those elements by zeros.
+
+##  The outer product of two arrays
+```
+
+If $a$ and $b$ are two numeric arrays, their outer product is an array whose dimension vector is obtained by concatenating their two dimension vectors (\textcolor{red}{order is important}), and whose data vector is got by forming all possible products of elements of the data vector of $a$ with those of $b$.
+
+The outer product is formed by the special operator `%o%`:
+
+```{r}
+#| eval: false
+
+ab <- a %o% b
+## An alternative is
+ab <- outer(a, b, "*")
+```
+
+The multiplication function can be replaced by an arbitrary function of two variables. For example if we wished to evaluate the function $f(x; y) = cos(y)/(1 + x^2)$ over a regular grid of values with $x$ and $y$ coordinates defined by the R vectors $x$ and $y$ respectively, we could proceed as follows:
+
+```{r}
+#| eval: false
+
+f <- function(x, y) cos(y)/(1 + x^2)
+z <- outer(x, y, f)
+```
+
+## Matrix facilities
+
+As noted above, a matrix is just an array with two subscripts. However it is such an important special case it needs a separate discussion. R contains many operators and functions that are available only for matrices. For example `t(X)` is the matrix transpose function, as noted above.
+
+The functions `nrow(A)` and `ncol(A)` give the number of rows and columns in the matrix $A$ respectively.
+
+### Matrix multiplication
+
+The operator `%*%` is used for matrix multiplication.
+
+If, for example, A and B are square matrices of the same size, then
+
+```{r}
+A <- matrix(data = 1:9, nrow = 3, ncol = 3)
+B <- matrix(data = 2:10, nrow = 3, ncol = 3)
+x <- 1:3
+A * B # is the matrix of element by element products
+A %*% B # is the matrix product
+#  If x is a vector, then
+x %*% A %*% x # s a quadratic form.
+```
+
+The function `crossprod()` forms \textcolor{blue}{crossproducts}, meaning that `crossprod(X, y)` is the same as `t(X) %*% y` but the operation is more efficient. If the second argument to `crossprod()` is omitted it is taken to be the same as the first.
+
+The meaning of `diag()` depends on its argument. `diag(v)`, where v is a vector, gives a diagonal matrix with elements of the vector as the diagonal entries. On the other hand `diag(M)`, where M is a matrix, gives the vector of main diagonal entries of M. if k is a single numeric value then `diag(k)` is the *k by k* identity matrix!.
+
+### Eigenvalues and Eigenvectors
+
+The function `eigen(Sm)` calculates the eigenvalues and eigenvectors of a symmetric matrix Sm. The result of this function is a list of two components named *values* and *vectors*. The assignment:
+
+```{r}
+A <- matrix(data = 1:9, nrow = 3, ncol = 3)
+eigen(A)
+ev <- eigen(A)
+ev$values #  is the vector of eigenvalues of Sm
+ev$vectors #  is the matrix of corresponding eigenvectors
+
+
+svd(A) #  Singular value decomposition and determinants
+```
+
+# Data and Data Manipulation
+
+1.  **matrix (base):** This is the basic matrix format and is based on the numeric index of rows and columns. This format is strict about the data class, and it isn't possible to combine multiple classes in the same table. For example, it is not possible to have both numeric and strings at the same table.
+
+2.  **data.frame (base):** This is one of the most popular tabular formats in R. This is a more progressive and liberal version of the matrix function. It includes additional attributes, which support the combination of multiple classes in the same table and different indexing methods.
+
+3.  **tibble (tibble):** It is part of the tidyverse family of packages (RStudio designed packages for data science applications). This type of data is another tabular format and an improved version of the data.frame base package with the improvements that are related to printing and sub-setting applications.
+
+4.  **ts (stats) and mts (stats):** This is R's built-in function for time series data, where ts is designed to be used with single time series data and multiple time series (mts) supports multiple time series data.
+
+5.  **zoo (zoo) and xts (xts):** Both are designated data structures for time series data and are based on the matrix format with a timestamp index.
+
+## Lists and data frames
+
+### list
+
+An R list is an object consisting of an ordered collection of objects known as its components. There is no particular need for the components to be of the same mode or type, and, for example, a list could consist of a numeric vector, a logical value, a matrix, a complex vector, a character array, a function, and so on. Here is a simple example
+
+```{r}
+lst <- list(name = "Fred", wife = "Mary", no.children = 3,
+            child.ages = c(4, 7, 9));lst
+```
+
+Components are always numbered and may always be referred to as such. Thus if lst is the name of a list with four components, these may be individually referred to as `lst[[1]]`, `lst[[2]]`, `lst[[3]]` and `lst[[4]]`. If, further, `lst[[4]]` is a vector sub-scripted array then `lst[[4]][1]` is its first entry. If lst is a list, then the function \`length(lst)\` gives the number of (top level) components it has.
+
+## Constructing and modifying lists
+
+New lists may be formed from existing objects by the function `list()`. An assignment of the form
+
+```{r}
+#| eval: false
+
+lst <- list(name_1 = object_1, ..., name_m = object_m)
+```
+
+which sets up a list lst of $m$ components using $object_1, . . ., object_m$ for the components and giving them names as specified by the argument names, (which can be freely chosen). If these names are omitted, the components are numbered only.
+
+Lists, can be extended by specifying additional components. For example
+
+```{r}
+lst[5] <- list(matrix = "Mat")
+```
+
+# Grouping, Loops and Conditional Execution
+
+## Loops
+
+**What are loops**
+
+A loop is a programming instruction that repeats until a specific condition is reached.
+
+The loop executes a code block again and again until no further action is required.
+
+Each time the code block within the loop is executed is called an [iteration](https://web.stanford.edu/group/sisl/k12/optimization/MO-unit1-pdfs/1.8iterativeloops.pdf).
+
+![Loops in R](loops.png){#fig-loops}
+
+### Writing for-Loops in R
+
+[for-loops](https://en.wikipedia.org/wiki/Foreach_loop) specify a [collection of objects](https://en.wikipedia.org/wiki/Container_(abstract_data_type)) (e.g. elements in a vector or list) to which a code block should be applied.
+
+A for-loop consists of two parts: First, a header that specifies the collection of objects; Second, a body containing a code block that is executed once per object.
+
+First, we have to specify a data object that we can use within the for-loop:
+
+```{r}
+x_for <- 0   # Preliminary specification of data object
+```
+
+Let's assume that we want to run a for-loop that iterates over a vector with ten elements (i.e. 1:10). In each iteration, we want to add +1 to our data object and we want to print this data object
+
+```{r}
+for (i in 1:10) {         # Head of for-loop
+  x_for <- x_for + 1     # Body of for-loop
+  print(x_for)
+}
+```
+
+[Click here](https://statisticsglobe.com/for-loop-in-r) to find more detailed explanations and advanced programming examples of for-loops in R.
+
+### Writing while-Loops in R
+
+[while-loops](https://study.com/academy/lesson/while-loop-definition-example-results.html) repeat a code block as long as a certain [logical condition](https://www.statmethods.net/management/operators.html) is TRUE.
+
+This code is typically used when we don't know the exact number of times our R code needs to be executed.
+
+The following code illustrates how to write and use while-loops in R. Again, we have to create a data object first:
+
+```{r}
+x_while <- 0        # Preliminary specification of data object
+```
+
+Now, let's assume that we want to repeat a code block, which adds +1 to our data object, as long as our data object is smaller than 10. We also want to print this data object at the beginning of each iteration
+
+```{r}
+while (x_while < 10) {         # Head of while-loop
+  x_while <- x_while + 1      # Body of while-loop
+  print(x_while)
+}
+```
+
+[Click here](https://statisticsglobe.com/while-loop-in-r/) to find more detailed explanations and advanced programming examples of while-loops in R.
+
+### Writing repeat-Loops in R
+
+[repeat-loops](http://docs.eggplantsoftware.com/ePF/SenseTalk/stk-repeat-loops.htm) repeat a code block until a [break condition](https://statisticsglobe.com/r-break-next-function-for-loop-example) is fulfilled. This break condition marks the end of the loop.
+
+repeat-loops follow a similar logic as while-loops, since they can also be used when the user doesn't know the exact number of times the R code should be repeated.
+
+```{r}
+x_repeat <- 0                 # Preliminary specification of data object
+```
+
+Now, we can apply a repeat-loop to get the same output as in the previous examples as shown below:
+
+```{r}
+repeat {                      # Head of repeat-loop
+  x_repeat <- x_repeat + 1    # Body of repeat-loop
+  print(x_repeat)
+  if (x_repeat >= 10) {        # Break condition of repeat-loop
+    break
+  }
+}
+```
+
+[Click here](https://statisticsglobe.com/repeat-loop-in-r/) to find more detailed explanations and advanced programming examples of repeat-loops in R.
+
+# Writing your own Functions
+
+```{r}
+x <- 1:5
+circle <- function(r) {
+  Area <- pi*r^2
+  Circumference <- 2*pi*r
+  return(list(Area = Area, Circumference = Circumference))
+}
+circle(x)
+```
+
+```{r}
+x <- 1:5
+circle <- function(r) {
+  Area <- pi*r^2
+  Circumference <- 2*pi*r
+  return(data.frame(Area = Area, Circumference = Circumference))
+}
+
+output <- circle(x)
+require(kableExtra)
+kable(output)
+```
+
+# Statistical Analysis, Tests and Distributions
+
+## Statistical Analysis
+
+### Central Moment
+
+The $k^{th}$ central moment of a data population can be obtained in R by:
+
+::: callout-note
+## Problem
+
+Find the third central moment of eruption duration in the faithful dataset
+:::
+
+```{r}
+require(e1071) # load e1071
+duration = faithful$eruptions # eruption duration
+moment(duration, order=3, center=TRUE)
+```
+
+## Statistical Tests
+
+### Augmented Dickey--Fuller test
+
+In statistics and econometrics, an augmented Dickey--Fuller test (ADF) tests the null hypothesis that a unit root is present in a time series sample.
+
+## Probability Distributions
+
+### R as a set of statistical tables
+
+One convenient use of R is to provide a comprehensive set of statistical tables. Functions are provided to evaluate the cumulative distribution function $P(X \leq x)$, the probability density function and the quantile function (given \textcolor{purple}{q} the smallest \textcolor{blue}{x} such that $P(X \leq x) > q)$, and to simulate from the distribution.
+
+| **Distribution**  | **R name** | **additional arguments** |
+|-------------------|------------|--------------------------|
+| beta              | `beta`     | `shape1, shape2, ncp`    |
+| binomial          | `binom`    | `size, prob`             |
+| Cauchy            | `cauchy`   | `location, scale`        |
+| chi-squared       | `chisq`    | `df , ncp`               |
+| exponential       | `exp`      | `rate`                   |
+| F                 | `f`        | `df1, df2, ncp`          |
+| gamma             | `gamma`    | `shape, scale`           |
+| geometric         | `geom`     | `prob`                   |
+| hypergeometric    | `hyper`    | `m, n, k`                |
+| log-normal        | `lnorm`    | `meanlog, sdlog`         |
+| logistic          | `logis`    | `location, scale`        |
+| negative binomial | `nbinom`   | `size, prob`             |
+| normal            | `norm`     | `mean, sd`               |
+| Poisson           | `pois`     | `lambda`                 |
+| signed rank       | `signrank` | `n`                      |
+| Student's t       | `t`        | `df , ncp`               |
+| uniform           | `unif`     | `min, max`               |
+| Weibull           | `weibull`  | `shape, scale`           |
+| Wilcoxon          | `wilcox`   | `m, n`                   |
+
+: Distributions in R {#tbl-distributions}
+
+Prefix the name given here by `d` for the density, `p` for the CDF, `q` for the quantile function and `r` for simulation (random deviates). The first argument is `x` for `dxxx`, `q` for `pxxx`, `p` for `qxxx` and `n` for `rxxx` (except for `rhyper`, `rsignrank` and `rwilcox`, for which it is `nn`). In not quite all cases is the non-centrality parameter `ncp` currently available.\
+The `pxxx` and `qxxx` functions all have logical arguments `lower.tail` and `log.p` and the `dxxx` ones have `log`. This allows, e.g., getting the cumulative (or "integrated") hazard function, $H(t) = − log(1 − F(t))$, by
+
+```{r}
+#| eval: false
+
+-pxxx(t, ..., lower.tail = FALSE, log.p = TRUE)
+```
+
+or more accurate log-likelihoods by
+
+```{r}
+#| eval: false
+
+dxxx(..., log = TRUE)
+```
+
+In addition, there are functions `ptukey` and `qtukey` for the distribution of the studentized range of samples from a normal distribution, and `dmultinom` and `rmultinom` for the multinomial distribution. Further distributions are available in contributed packages, notably `Suppdists`.\
+Here are some examples:
+
+```{r}
+## 2-tailed p-value for t distribution
+2 * pt(-2.43, df = 13)
+
+## upper 1% point for an F(2, 7) distribution
+qf(0.01, 2, 7, lower.tail = FALSE)
+```
+
+## Examining the distribution of a set of data
+
+# Appendix: All code for this report
+
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+```

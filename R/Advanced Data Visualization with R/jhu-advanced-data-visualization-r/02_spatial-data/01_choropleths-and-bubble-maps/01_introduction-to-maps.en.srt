@@ -1,0 +1,419 @@
+1
+00:00:00,990 --> 00:00:03,600
+Today, we get started
+with making maps in R.
+
+2
+00:00:04,960 --> 00:00:09,129
+In this video, we're going to
+focus just on drawing maps, and
+
+3
+00:00:09,129 --> 00:00:13,870
+then we'll move on down the road
+to organizing geographic data, and
+
+4
+00:00:13,870 --> 00:00:16,420
+mapping data in subsequent videos.
+
+5
+00:00:18,850 --> 00:00:21,061
+To really simplified things,
+
+6
+00:00:21,061 --> 00:00:26,085
+any geospatial visualization that
+you draw in R requires two things.
+
+7
+00:00:26,085 --> 00:00:29,640
+First, you have to draw the map
+using some kind of data
+
+8
+00:00:29,640 --> 00:00:34,070
+that directs R to draw the polygon
+shapes that constitute the map.
+
+9
+00:00:36,180 --> 00:00:42,400
+Then you add information to your map that
+you will use to plot color and marks.
+
+10
+00:00:44,410 --> 00:00:47,962
+And in that sense, it's the same
+basic logic that we've used for
+
+11
+00:00:47,962 --> 00:00:49,260
+ggplot figures so far.
+
+12
+00:00:50,440 --> 00:00:54,156
+The key thing is to have datasets
+that link that geographic data with
+
+13
+00:00:54,156 --> 00:00:57,490
+the substantive information that
+you want to put on the plot.
+
+14
+00:01:01,420 --> 00:01:02,921
+This is all pretty abstract, so
+
+15
+00:01:02,921 --> 00:01:05,930
+let's just jump right in with
+a straightforward example here.
+
+16
+00:01:09,868 --> 00:01:14,605
+The Maps package in R contains a set
+of maps of the United States and
+
+17
+00:01:14,605 --> 00:01:18,410
+the world drawn using longitude and
+latitude data.
+
+18
+00:01:20,817 --> 00:01:24,915
+Obviously, there are a lot of other
+geographic entities that you might want to
+
+19
+00:01:24,915 --> 00:01:25,743
+draw a map for.
+
+20
+00:01:25,743 --> 00:01:29,579
+But with the World map and the USA map
+with the individual states you can
+
+21
+00:01:29,579 --> 00:01:33,560
+accomplish a lot of the mapping tasks,
+and get an idea for how to do this.
+
+22
+00:01:37,322 --> 00:01:40,000
+Let's just make a map already and
+this will start making more sense.
+
+23
+00:01:41,550 --> 00:01:46,040
+To start, I said we need to get
+the data for R to draw the map.
+
+24
+00:01:46,040 --> 00:01:50,756
+And in the Maps package there's a command
+called Map Data that can be used
+
+25
+00:01:50,756 --> 00:01:55,720
+to retrieve these pre baked maps that
+are included in the software package.
+
+26
+00:01:59,158 --> 00:02:02,053
+Let's take a look at
+the help file here for
+
+27
+00:02:02,053 --> 00:02:06,767
+Map Data, and we see that in this
+command the first input is map, and
+
+28
+00:02:06,767 --> 00:02:11,590
+this asks us to specify the map from
+the package that we want R to draw.
+
+29
+00:02:13,620 --> 00:02:18,551
+And we see here in the help file that
+the options are for US county, France,
+
+30
+00:02:18,551 --> 00:02:23,660
+Italy, New Zealand, US states, and
+two different versions of a World map.
+
+31
+00:02:25,770 --> 00:02:29,663
+Unfortunately, we don't have other
+administrative subunits of the other
+
+32
+00:02:29,663 --> 00:02:31,193
+countries in this database.
+
+33
+00:02:31,193 --> 00:02:35,001
+And this is why you're going to have
+to go out and grab some of this data
+
+34
+00:02:35,001 --> 00:02:39,300
+on your own in the future if you want
+to map other kinds of geographic units.
+
+35
+00:02:43,658 --> 00:02:48,458
+Now let's take a look at the World map
+data that is baked into the package.
+
+36
+00:02:48,458 --> 00:02:53,399
+And we do that by using the command
+map_data and we have the input world,
+
+37
+00:02:53,399 --> 00:02:57,630
+and then we save this to
+the object my_world_map.
+
+38
+00:02:57,630 --> 00:03:00,282
+Of course, you could name this
+object whatever you like, but
+
+39
+00:03:00,282 --> 00:03:02,170
+my_world_map is what will use right now.
+
+40
+00:03:06,305 --> 00:03:10,139
+The object that is generated when
+you run this line is a data frame,
+
+41
+00:03:10,139 --> 00:03:14,725
+and we can take a peek at it here, and see
+that the important columns are the set of
+
+42
+00:03:14,725 --> 00:03:18,580
+latitude and longitude coordinates
+that are used to draw the map.
+
+43
+00:03:19,970 --> 00:03:24,956
+A column of country names that correspond
+with each of these geographic points,
+
+44
+00:03:24,956 --> 00:03:29,080
+and a group column that specifies
+a group number for each country.
+
+45
+00:03:32,580 --> 00:03:36,787
+If you look through this entire table,
+you would see that for some countries,
+
+46
+00:03:36,787 --> 00:03:40,628
+there are sub regions, but we are going to
+worry about that for right now.
+
+47
+00:03:40,628 --> 00:03:44,735
+And this order column is just a sequential
+vector that you can also ignore for
+
+48
+00:03:44,735 --> 00:03:46,030
+the current purposes.
+
+49
+00:03:50,400 --> 00:03:54,083
+Now that we have Map Data at our
+fingertips, let's go ahead and
+
+50
+00:03:54,083 --> 00:03:56,110
+use that to draw a map with Ggplot.
+
+51
+00:03:57,630 --> 00:04:02,280
+With the Ggpplot command we
+set the data to my_world_map.
+
+52
+00:04:03,780 --> 00:04:07,602
+And for the aesthetics,
+we want longitude on the x-axis,
+
+53
+00:04:07,602 --> 00:04:12,810
+because longitude changes as you move
+horizontally on a map, so on the x-axis.
+
+54
+00:04:14,160 --> 00:04:18,331
+And we set latitude to the y-axis
+because latitude varies as
+
+55
+00:04:18,331 --> 00:04:22,270
+you move vertically on a map,
+up and down on the y-axis.
+
+56
+00:04:26,038 --> 00:04:30,214
+We also need to set the group here to the
+group column in order to get the border to
+
+57
+00:04:30,214 --> 00:04:31,180
+draw correctly.
+
+58
+00:04:35,229 --> 00:04:39,632
+Once we have these aesthetics maps,
+we add geom_polygon to tell
+
+59
+00:04:39,632 --> 00:04:44,610
+Ggplot to draw the map for us, which
+after all is just a bunch of polygons.
+
+60
+00:04:46,180 --> 00:04:51,168
+This is a Ggplot geom in the same sense
+as points, or lines, or bar plots,
+
+61
+00:04:51,168 --> 00:04:54,230
+or other things that
+we've done in the past.
+
+62
+00:04:58,955 --> 00:05:00,549
+Let's go ahead and run this and
+
+63
+00:05:00,549 --> 00:05:04,609
+we see that we get a map with black fill
+in the countries and white border lines.
+
+64
+00:05:13,810 --> 00:05:18,679
+So now we have a world map and that can be
+the basis for visualization, so we can add
+
+65
+00:05:18,679 --> 00:05:23,490
+color and dots to this in the future in
+order to draw different kinds of figures.
+
+66
+00:05:25,270 --> 00:05:28,909
+Now, let's say that we wanted to look
+at just one part of the World map,
+
+67
+00:05:28,909 --> 00:05:29,890
+a single country.
+
+68
+00:05:31,770 --> 00:05:36,909
+You can do this by setting a filter on
+the Maps Data that selects only a certain
+
+69
+00:05:36,909 --> 00:05:42,291
+country or set of countries, and creates
+a data frame with just the latitude and
+
+70
+00:05:42,291 --> 00:05:45,210
+longitude for those selected countries.
+
+71
+00:05:48,593 --> 00:05:52,853
+We use the Tidyverse Command filter as
+we've done in the past for this, and
+
+72
+00:05:52,853 --> 00:05:56,110
+let's say that we wanted to
+create a map of just Germany.
+
+73
+00:05:57,990 --> 00:06:03,040
+We would create a subset of the world map
+data using this filter for just Germany.
+
+74
+00:06:06,204 --> 00:06:07,216
+Or Alternatively,
+
+75
+00:06:07,216 --> 00:06:10,610
+we could filter by more than one
+country to draw several countries.
+
+76
+00:06:12,100 --> 00:06:14,502
+And it's best to use
+contiguous countries here,
+
+77
+00:06:14,502 --> 00:06:18,520
+otherwise you get some strange
+issues about projection and scaling.
+
+78
+00:06:18,520 --> 00:06:21,123
+So let's do a filter here with Germany and
+France.
+
+79
+00:06:27,010 --> 00:06:30,529
+And as expected, now we get the figure
+of France and Germany drawn,
+
+80
+00:06:30,529 --> 00:06:34,190
+because that's the only day that we
+selected from the world map data.
+
+81
+00:06:37,812 --> 00:06:41,314
+Another approach, if you didn't
+want to pick individual countries,
+
+82
+00:06:41,314 --> 00:06:44,160
+would be to filter the map
+data by latitude in longitude,
+
+83
+00:06:44,160 --> 00:06:47,030
+especially zooming in on the box
+that you draw on the map.
+
+84
+00:06:51,119 --> 00:06:55,069
+As I said, drawing these maps creates
+the backbone for visualizations, and
+
+85
+00:06:55,069 --> 00:06:58,657
+we're going to add additional
+information going further that will show
+
+86
+00:06:58,657 --> 00:07:00,540
+using color and shapes.
+
+87
+00:07:00,540 --> 00:07:02,450
+And will work on doing
+that in the next video.

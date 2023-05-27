@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Visualization with R</title>
+  <meta name="description" content="A guide to creating modern data visualizations with R. Starting with data preparation, topics include how to create effective univariate, bivariate, and multivariate graphs. In addition specialized graphs including geographic maps, the display of change over time, flow diagrams, interactive graphs, and graphs that help with the interpret statistical models are included. Focus is on the 45 most popular graph types. The guide also includes detailed instructions on how to customizing graphs, and ends with a chapter on graphing best practices. Although strongly based on the ggplot2 package, other approaches are included as well.">
+  <meta name="generator" content="bookdown 0.7.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Visualization with R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://rkabacoff.github.io/datavis/" />
+  <meta property="og:image" content="https://rkabacoff.github.io/datavis/img/cover.png" />
+  <meta property="og:description" content="A guide to creating modern data visualizations with R. Starting with data preparation, topics include how to create effective univariate, bivariate, and multivariate graphs. In addition specialized graphs including geographic maps, the display of change over time, flow diagrams, interactive graphs, and graphs that help with the interpret statistical models are included. Focus is on the 45 most popular graph types. The guide also includes detailed instructions on how to customizing graphs, and ends with a chapter on graphing best practices. Although strongly based on the ggplot2 package, other approaches are included as well." />
+  <meta name="github-repo" content="rkabacoff/datavis" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Visualization with R" />
+  
+  <meta name="twitter:description" content="A guide to creating modern data visualizations with R. Starting with data preparation, topics include how to create effective univariate, bivariate, and multivariate graphs. In addition specialized graphs including geographic maps, the display of change over time, flow diagrams, interactive graphs, and graphs that help with the interpret statistical models are included. Focus is on the 45 most popular graph types. The guide also includes detailed instructions on how to customizing graphs, and ends with a chapter on graphing best practices. Although strongly based on the ggplot2 package, other approaches are included as well." />
+  <meta name="twitter:image" content="https://rkabacoff.github.io/datavis/img/cover.png" />
+
+<meta name="author" content="Rob Kabacoff">
+
+
+<meta name="date" content="2018-09-03">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="Time.html">
+<link rel="next" href="Other.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/sankey-1/sankey.js"></script>
+<script src="libs/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script>
+<link href="libs/leaflet-0.7.7/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-0.7.7/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<link href="libs/leaflet-label-0.2.2/leaflet.label.css" rel="stylesheet" />
+<script src="libs/leaflet-label-0.2.2/leaflet.label.js"></script>
+<script src="libs/Proj4Leaflet-0.7.2/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-0.7.2/proj4leaflet.js"></script>
+<script src="libs/leaflet-binding-1.1.0/leaflet.js"></script>
+<script src="libs/plotly-binding-4.7.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotlyjs-1.29.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotlyjs-1.29.2/plotly-latest.min.js"></script>
+<link href="libs/bokehjs-0.12.2/bokeh.min.css" rel="stylesheet" />
+<link href="libs/bokehjs-0.12.2/loader.css" rel="stylesheet" />
+<script src="libs/bokehjs-0.12.2/bokeh.min.js"></script>
+<script src="libs/rbokeh-binding-0.5.0/rbokeh.js"></script>
+<script src="libs/proj4js-2.3.15/proj4.js"></script>
+<link href="libs/highcharts-5.0.6/css/motion.css" rel="stylesheet" />
+<script src="libs/highcharts-5.0.6/highstock.js"></script>
+<script src="libs/highcharts-5.0.6/highcharts-3d.js"></script>
+<script src="libs/highcharts-5.0.6/highcharts-more.js"></script>
+<script src="libs/highcharts-5.0.6/modules/annotations.js"></script>
+<script src="libs/highcharts-5.0.6/modules/broken-axis.js"></script>
+<script src="libs/highcharts-5.0.6/modules/data.js"></script>
+<script src="libs/highcharts-5.0.6/modules/drilldown.js"></script>
+<script src="libs/highcharts-5.0.6/modules/exporting.js"></script>
+<script src="libs/highcharts-5.0.6/modules/funnel.js"></script>
+<script src="libs/highcharts-5.0.6/modules/heatmap.js"></script>
+<script src="libs/highcharts-5.0.6/modules/map.js"></script>
+<script src="libs/highcharts-5.0.6/modules/no-data-to-display.js"></script>
+<script src="libs/highcharts-5.0.6/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-5.0.6/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-5.0.6/modules/treemap.js"></script>
+<script src="libs/highcharts-5.0.6/plugins/annotations.js"></script>
+<script src="libs/highcharts-5.0.6/plugins/draggable-legend.js"></script>
+<script src="libs/highcharts-5.0.6/plugins/draggable-points.js"></script>
+<script src="libs/highcharts-5.0.6/plugins/export-csv.js"></script>
+<script src="libs/highcharts-5.0.6/plugins/grouped-categories.js"></script>
+<script src="libs/highcharts-5.0.6/plugins/motion.js"></script>
+<script src="libs/highcharts-5.0.6/plugins/pattern-fill-v2.js"></script>
+<script src="libs/highcharts-5.0.6/plugins/tooltip-delay.js"></script>
+<script src="libs/highcharts-5.0.6/custom/reset.js"></script>
+<script src="libs/highcharts-5.0.6/custom/symbols-extra.js"></script>
+<script src="libs/highcharts-5.0.6/custom/text-symbols.js"></script>
+<link href="libs/fontawesome-4.5.0/font-awesome.min.css" rel="stylesheet" />
+<link href="libs/htmlwdgtgrid-1/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="libs/highchart-binding-0.5.0/highchart.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122312673-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122312673-1');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Datavis with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-to-use-this-book"><i class="fa fa-check"></i>How to use this book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#prequisites"><i class="fa fa-check"></i>Prequisites</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="DataPrep.html"><a href="DataPrep.html"><i class="fa fa-check"></i><b>1</b> Data Preparation</a><ul>
+<li class="chapter" data-level="1.1" data-path="DataPrep.html"><a href="DataPrep.html#importing"><i class="fa fa-check"></i><b>1.1</b> Importing data</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="DataPrep.html"><a href="DataPrep.html#text-files"><i class="fa fa-check"></i><b>1.1.1</b> Text files</a></li>
+<li class="chapter" data-level="1.1.2" data-path="DataPrep.html"><a href="DataPrep.html#excel-spreadsheets"><i class="fa fa-check"></i><b>1.1.2</b> Excel spreadsheets</a></li>
+<li class="chapter" data-level="1.1.3" data-path="DataPrep.html"><a href="DataPrep.html#statistical-packages"><i class="fa fa-check"></i><b>1.1.3</b> Statistical packages</a></li>
+<li class="chapter" data-level="1.1.4" data-path="DataPrep.html"><a href="DataPrep.html#databases"><i class="fa fa-check"></i><b>1.1.4</b> Databases</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="DataPrep.html"><a href="DataPrep.html#cleaning-data"><i class="fa fa-check"></i><b>1.2</b> Cleaning data</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="DataPrep.html"><a href="DataPrep.html#selecting-variables"><i class="fa fa-check"></i><b>1.2.1</b> Selecting variables</a></li>
+<li class="chapter" data-level="1.2.2" data-path="DataPrep.html"><a href="DataPrep.html#selecting-observations"><i class="fa fa-check"></i><b>1.2.2</b> Selecting observations</a></li>
+<li class="chapter" data-level="1.2.3" data-path="DataPrep.html"><a href="DataPrep.html#creatingrecoding-variables"><i class="fa fa-check"></i><b>1.2.3</b> Creating/Recoding variables</a></li>
+<li class="chapter" data-level="1.2.4" data-path="DataPrep.html"><a href="DataPrep.html#summarizing-data"><i class="fa fa-check"></i><b>1.2.4</b> Summarizing data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="DataPrep.html"><a href="DataPrep.html#using-pipes"><i class="fa fa-check"></i><b>1.2.5</b> Using pipes</a></li>
+<li class="chapter" data-level="1.2.6" data-path="DataPrep.html"><a href="DataPrep.html#Reshaping"><i class="fa fa-check"></i><b>1.2.6</b> Reshaping data</a></li>
+<li class="chapter" data-level="1.2.7" data-path="DataPrep.html"><a href="DataPrep.html#missing-data"><i class="fa fa-check"></i><b>1.2.7</b> Missing data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html"><i class="fa fa-check"></i><b>2</b> Introduction to ggplot2</a><ul>
+<li class="chapter" data-level="2.1" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#a-worked-example"><i class="fa fa-check"></i><b>2.1</b> A worked example</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#ggplot"><i class="fa fa-check"></i><b>2.1.1</b> ggplot</a></li>
+<li class="chapter" data-level="2.1.2" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#geoms"><i class="fa fa-check"></i><b>2.1.2</b> geoms</a></li>
+<li class="chapter" data-level="2.1.3" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#grouping"><i class="fa fa-check"></i><b>2.1.3</b> grouping</a></li>
+<li class="chapter" data-level="2.1.4" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#scales"><i class="fa fa-check"></i><b>2.1.4</b> scales</a></li>
+<li class="chapter" data-level="2.1.5" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#facets"><i class="fa fa-check"></i><b>2.1.5</b> facets</a></li>
+<li class="chapter" data-level="2.1.6" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#labels"><i class="fa fa-check"></i><b>2.1.6</b> labels</a></li>
+<li class="chapter" data-level="2.1.7" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#themes"><i class="fa fa-check"></i><b>2.1.7</b> themes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#placing-the-data-and-mapping-options"><i class="fa fa-check"></i><b>2.2</b> Placing the <code>data</code> and <code>mapping</code> options</a></li>
+<li class="chapter" data-level="2.3" data-path="IntroGGPLOT.html"><a href="IntroGGPLOT.html#graphs-as-objects"><i class="fa fa-check"></i><b>2.3</b> Graphs as objects</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="Univariate.html"><a href="Univariate.html"><i class="fa fa-check"></i><b>3</b> Univariate Graphs</a><ul>
+<li class="chapter" data-level="3.1" data-path="Univariate.html"><a href="Univariate.html#categorical"><i class="fa fa-check"></i><b>3.1</b> Categorical</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="Univariate.html"><a href="Univariate.html#Barchart"><i class="fa fa-check"></i><b>3.1.1</b> Bar chart</a></li>
+<li class="chapter" data-level="3.1.2" data-path="Univariate.html"><a href="Univariate.html#pie-chart"><i class="fa fa-check"></i><b>3.1.2</b> Pie chart</a></li>
+<li class="chapter" data-level="3.1.3" data-path="Univariate.html"><a href="Univariate.html#tree-map"><i class="fa fa-check"></i><b>3.1.3</b> Tree map</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="Univariate.html"><a href="Univariate.html#quantitative"><i class="fa fa-check"></i><b>3.2</b> Quantitative</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="Univariate.html"><a href="Univariate.html#histogram"><i class="fa fa-check"></i><b>3.2.1</b> Histogram</a></li>
+<li class="chapter" data-level="3.2.2" data-path="Univariate.html"><a href="Univariate.html#Kernel"><i class="fa fa-check"></i><b>3.2.2</b> Kernel Density plot</a></li>
+<li class="chapter" data-level="3.2.3" data-path="Univariate.html"><a href="Univariate.html#dot-chart"><i class="fa fa-check"></i><b>3.2.3</b> Dot Chart</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="Bivariate.html"><a href="Bivariate.html"><i class="fa fa-check"></i><b>4</b> Bivariate Graphs</a><ul>
+<li class="chapter" data-level="4.1" data-path="Bivariate.html"><a href="Bivariate.html#Categorical-Categorical"><i class="fa fa-check"></i><b>4.1</b> Categorical vs. Categorical</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="Bivariate.html"><a href="Bivariate.html#stacked-bar-chart"><i class="fa fa-check"></i><b>4.1.1</b> Stacked bar chart</a></li>
+<li class="chapter" data-level="4.1.2" data-path="Bivariate.html"><a href="Bivariate.html#grouped-bar-chart"><i class="fa fa-check"></i><b>4.1.2</b> Grouped bar chart</a></li>
+<li class="chapter" data-level="4.1.3" data-path="Bivariate.html"><a href="Bivariate.html#segmented-bar-chart"><i class="fa fa-check"></i><b>4.1.3</b> Segmented bar chart</a></li>
+<li class="chapter" data-level="4.1.4" data-path="Bivariate.html"><a href="Bivariate.html#improving-the-color-and-labeling"><i class="fa fa-check"></i><b>4.1.4</b> Improving the color and labeling</a></li>
+<li class="chapter" data-level="4.1.5" data-path="Bivariate.html"><a href="Bivariate.html#other-plots"><i class="fa fa-check"></i><b>4.1.5</b> Other plots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="Bivariate.html"><a href="Bivariate.html#quantitative-vs.quantitative"><i class="fa fa-check"></i><b>4.2</b> Quantitative vs. Quantitative</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="Bivariate.html"><a href="Bivariate.html#Scatterplot"><i class="fa fa-check"></i><b>4.2.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="4.2.2" data-path="Bivariate.html"><a href="Bivariate.html#Line"><i class="fa fa-check"></i><b>4.2.2</b> Line plot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="Bivariate.html"><a href="Bivariate.html#categorical-vs.quantitative"><i class="fa fa-check"></i><b>4.3</b> Categorical vs. Quantitative</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="Bivariate.html"><a href="Bivariate.html#bar-chart-on-summary-statistics"><i class="fa fa-check"></i><b>4.3.1</b> Bar chart (on summary statistics)</a></li>
+<li class="chapter" data-level="4.3.2" data-path="Bivariate.html"><a href="Bivariate.html#grouped-kernel-density-plots"><i class="fa fa-check"></i><b>4.3.2</b> Grouped kernel density plots</a></li>
+<li class="chapter" data-level="4.3.3" data-path="Bivariate.html"><a href="Bivariate.html#box-plots"><i class="fa fa-check"></i><b>4.3.3</b> Box plots</a></li>
+<li class="chapter" data-level="4.3.4" data-path="Bivariate.html"><a href="Bivariate.html#ViolinPlot"><i class="fa fa-check"></i><b>4.3.4</b> Violin plots</a></li>
+<li class="chapter" data-level="4.3.5" data-path="Bivariate.html"><a href="Bivariate.html#ridgeline-plots"><i class="fa fa-check"></i><b>4.3.5</b> Ridgeline plots</a></li>
+<li class="chapter" data-level="4.3.6" data-path="Bivariate.html"><a href="Bivariate.html#MeanSEM"><i class="fa fa-check"></i><b>4.3.6</b> Mean/SEM plots</a></li>
+<li class="chapter" data-level="4.3.7" data-path="Bivariate.html"><a href="Bivariate.html#strip-plots"><i class="fa fa-check"></i><b>4.3.7</b> Strip plots</a></li>
+<li class="chapter" data-level="4.3.8" data-path="Bivariate.html"><a href="Bivariate.html#beeswarm-plots"><i class="fa fa-check"></i><b>4.3.8</b> Beeswarm Plots</a></li>
+<li class="chapter" data-level="4.3.9" data-path="Bivariate.html"><a href="Bivariate.html#cleveland-dot-charts"><i class="fa fa-check"></i><b>4.3.9</b> Cleveland Dot Charts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="Multivariate.html"><a href="Multivariate.html"><i class="fa fa-check"></i><b>5</b> Multivariate Graphs</a><ul>
+<li class="chapter" data-level="5.1" data-path="Multivariate.html"><a href="Multivariate.html#Grouping"><i class="fa fa-check"></i><b>5.1</b> Grouping</a></li>
+<li class="chapter" data-level="5.2" data-path="Multivariate.html"><a href="Multivariate.html#Faceting"><i class="fa fa-check"></i><b>5.2</b> Faceting</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="GeoMaps.html"><a href="GeoMaps.html"><i class="fa fa-check"></i><b>6</b> Maps</a><ul>
+<li class="chapter" data-level="6.1" data-path="GeoMaps.html"><a href="GeoMaps.html#dot-density-maps"><i class="fa fa-check"></i><b>6.1</b> Dot density maps</a></li>
+<li class="chapter" data-level="6.2" data-path="GeoMaps.html"><a href="GeoMaps.html#choropleth-maps"><i class="fa fa-check"></i><b>6.2</b> Choropleth maps</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="GeoMaps.html"><a href="GeoMaps.html#data-by-country"><i class="fa fa-check"></i><b>6.2.1</b> Data by country</a></li>
+<li class="chapter" data-level="6.2.2" data-path="GeoMaps.html"><a href="GeoMaps.html#data-by-us-state"><i class="fa fa-check"></i><b>6.2.2</b> Data by US state</a></li>
+<li class="chapter" data-level="6.2.3" data-path="GeoMaps.html"><a href="GeoMaps.html#data-by-us-county"><i class="fa fa-check"></i><b>6.2.3</b> Data by US county</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Time.html"><a href="Time.html"><i class="fa fa-check"></i><b>7</b> Time-dependent graphs</a><ul>
+<li class="chapter" data-level="7.1" data-path="Time.html"><a href="Time.html#TimeSeries"><i class="fa fa-check"></i><b>7.1</b> Time series</a></li>
+<li class="chapter" data-level="7.2" data-path="Time.html"><a href="Time.html#dummbbell-charts"><i class="fa fa-check"></i><b>7.2</b> Dummbbell charts</a></li>
+<li class="chapter" data-level="7.3" data-path="Time.html"><a href="Time.html#slope-graphs"><i class="fa fa-check"></i><b>7.3</b> Slope graphs</a></li>
+<li class="chapter" data-level="7.4" data-path="Time.html"><a href="Time.html#area-charts"><i class="fa fa-check"></i><b>7.4</b> Area Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="Models.html"><a href="Models.html"><i class="fa fa-check"></i><b>8</b> Statistical Models</a><ul>
+<li class="chapter" data-level="8.1" data-path="Models.html"><a href="Models.html#Corrplot"><i class="fa fa-check"></i><b>8.1</b> Correlation plots</a></li>
+<li class="chapter" data-level="8.2" data-path="Models.html"><a href="Models.html#linear-regression"><i class="fa fa-check"></i><b>8.2</b> Linear Regression</a></li>
+<li class="chapter" data-level="8.3" data-path="Models.html"><a href="Models.html#logistic-regression"><i class="fa fa-check"></i><b>8.3</b> Logistic regression</a></li>
+<li class="chapter" data-level="8.4" data-path="Models.html"><a href="Models.html#survival-plots"><i class="fa fa-check"></i><b>8.4</b> Survival plots</a></li>
+<li class="chapter" data-level="8.5" data-path="Models.html"><a href="Models.html#Mosaic"><i class="fa fa-check"></i><b>8.5</b> Mosaic plots</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="Other.html"><a href="Other.html"><i class="fa fa-check"></i><b>9</b> Other Graphs</a><ul>
+<li class="chapter" data-level="9.1" data-path="Other.html"><a href="Other.html#d-scatterplot"><i class="fa fa-check"></i><b>9.1</b> 3-D Scatterplot</a></li>
+<li class="chapter" data-level="9.2" data-path="Other.html"><a href="Other.html#biplots"><i class="fa fa-check"></i><b>9.2</b> Biplots</a></li>
+<li class="chapter" data-level="9.3" data-path="Other.html"><a href="Other.html#Bubble"><i class="fa fa-check"></i><b>9.3</b> Bubble charts</a></li>
+<li class="chapter" data-level="9.4" data-path="Other.html"><a href="Other.html#flow-diagrams"><i class="fa fa-check"></i><b>9.4</b> Flow diagrams</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="Other.html"><a href="Other.html#sankey-diagrams"><i class="fa fa-check"></i><b>9.4.1</b> Sankey diagrams</a></li>
+<li class="chapter" data-level="9.4.2" data-path="Other.html"><a href="Other.html#alluvial-diagrams"><i class="fa fa-check"></i><b>9.4.2</b> Alluvial diagrams</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="Other.html"><a href="Other.html#heatmaps"><i class="fa fa-check"></i><b>9.5</b> Heatmaps</a></li>
+<li class="chapter" data-level="9.6" data-path="Other.html"><a href="Other.html#radar-charts"><i class="fa fa-check"></i><b>9.6</b> Radar charts</a></li>
+<li class="chapter" data-level="9.7" data-path="Other.html"><a href="Other.html#scatterplot-matrix"><i class="fa fa-check"></i><b>9.7</b> Scatterplot matrix</a></li>
+<li class="chapter" data-level="9.8" data-path="Other.html"><a href="Other.html#waterfall-charts"><i class="fa fa-check"></i><b>9.8</b> Waterfall charts</a></li>
+<li class="chapter" data-level="9.9" data-path="Other.html"><a href="Other.html#word-clouds"><i class="fa fa-check"></i><b>9.9</b> Word clouds</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="Customizing.html"><a href="Customizing.html"><i class="fa fa-check"></i><b>10</b> Customizing Graphs</a><ul>
+<li class="chapter" data-level="10.1" data-path="Customizing.html"><a href="Customizing.html#axes"><i class="fa fa-check"></i><b>10.1</b> Axes</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="Customizing.html"><a href="Customizing.html#quantitative-axes"><i class="fa fa-check"></i><b>10.1.1</b> Quantitative axes</a></li>
+<li class="chapter" data-level="10.1.2" data-path="Customizing.html"><a href="Customizing.html#categorical-axes"><i class="fa fa-check"></i><b>10.1.2</b> Categorical axes</a></li>
+<li class="chapter" data-level="10.1.3" data-path="Customizing.html"><a href="Customizing.html#Dates"><i class="fa fa-check"></i><b>10.1.3</b> Date axes</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="Customizing.html"><a href="Customizing.html#colors"><i class="fa fa-check"></i><b>10.2</b> Colors</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="Customizing.html"><a href="Customizing.html#specifying-colors-manually"><i class="fa fa-check"></i><b>10.2.1</b> Specifying colors manually</a></li>
+<li class="chapter" data-level="10.2.2" data-path="Customizing.html"><a href="Customizing.html#color-palettes"><i class="fa fa-check"></i><b>10.2.2</b> Color palettes</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="Customizing.html"><a href="Customizing.html#points-lines"><i class="fa fa-check"></i><b>10.3</b> Points &amp; Lines</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="Customizing.html"><a href="Customizing.html#points"><i class="fa fa-check"></i><b>10.3.1</b> Points</a></li>
+<li class="chapter" data-level="10.3.2" data-path="Customizing.html"><a href="Customizing.html#lines"><i class="fa fa-check"></i><b>10.3.2</b> Lines</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="Customizing.html"><a href="Customizing.html#fonts"><i class="fa fa-check"></i><b>10.4</b> Fonts</a></li>
+<li class="chapter" data-level="10.5" data-path="Customizing.html"><a href="Customizing.html#legends"><i class="fa fa-check"></i><b>10.5</b> Legends</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="Customizing.html"><a href="Customizing.html#legend-location"><i class="fa fa-check"></i><b>10.5.1</b> Legend location</a></li>
+<li class="chapter" data-level="10.5.2" data-path="Customizing.html"><a href="Customizing.html#legend-title"><i class="fa fa-check"></i><b>10.5.2</b> Legend title</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="Customizing.html"><a href="Customizing.html#labels-1"><i class="fa fa-check"></i><b>10.6</b> Labels</a></li>
+<li class="chapter" data-level="10.7" data-path="Customizing.html"><a href="Customizing.html#Annotations"><i class="fa fa-check"></i><b>10.7</b> Annotations</a><ul>
+<li class="chapter" data-level="10.7.1" data-path="Customizing.html"><a href="Customizing.html#adding-text"><i class="fa fa-check"></i><b>10.7.1</b> Adding text</a></li>
+<li class="chapter" data-level="10.7.2" data-path="Customizing.html"><a href="Customizing.html#adding-lines"><i class="fa fa-check"></i><b>10.7.2</b> Adding lines</a></li>
+<li class="chapter" data-level="10.7.3" data-path="Customizing.html"><a href="Customizing.html#highlighting-a-single-group"><i class="fa fa-check"></i><b>10.7.3</b> Highlighting a single group</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="Customizing.html"><a href="Customizing.html#themes-1"><i class="fa fa-check"></i><b>10.8</b> Themes</a><ul>
+<li class="chapter" data-level="10.8.1" data-path="Customizing.html"><a href="Customizing.html#altering-theme-elements"><i class="fa fa-check"></i><b>10.8.1</b> Altering theme elements</a></li>
+<li class="chapter" data-level="10.8.2" data-path="Customizing.html"><a href="Customizing.html#pre-packaged-themes"><i class="fa fa-check"></i><b>10.8.2</b> Pre-packaged themes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="SavingGraphs.html"><a href="SavingGraphs.html"><i class="fa fa-check"></i><b>11</b> Saving Graphs</a><ul>
+<li class="chapter" data-level="11.1" data-path="SavingGraphs.html"><a href="SavingGraphs.html#via-menus"><i class="fa fa-check"></i><b>11.1</b> Via menus</a></li>
+<li class="chapter" data-level="11.2" data-path="SavingGraphs.html"><a href="SavingGraphs.html#SavingGraphsProgrammatically"><i class="fa fa-check"></i><b>11.2</b> Via code</a></li>
+<li class="chapter" data-level="11.3" data-path="SavingGraphs.html"><a href="SavingGraphs.html#file-formats"><i class="fa fa-check"></i><b>11.3</b> File formats</a></li>
+<li class="chapter" data-level="11.4" data-path="SavingGraphs.html"><a href="SavingGraphs.html#external-editing"><i class="fa fa-check"></i><b>11.4</b> External editing</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="Interactive.html"><a href="Interactive.html"><i class="fa fa-check"></i><b>12</b> Interactive Graphs</a><ul>
+<li class="chapter" data-level="12.1" data-path="Interactive.html"><a href="Interactive.html#leaflet"><i class="fa fa-check"></i><b>12.1</b> leaflet</a></li>
+<li class="chapter" data-level="12.2" data-path="Interactive.html"><a href="Interactive.html#plotly"><i class="fa fa-check"></i><b>12.2</b> plotly</a></li>
+<li class="chapter" data-level="12.3" data-path="Interactive.html"><a href="Interactive.html#rbokeh"><i class="fa fa-check"></i><b>12.3</b> rbokeh</a></li>
+<li class="chapter" data-level="12.4" data-path="Interactive.html"><a href="Interactive.html#rcharts"><i class="fa fa-check"></i><b>12.4</b> rCharts</a></li>
+<li class="chapter" data-level="12.5" data-path="Interactive.html"><a href="Interactive.html#highcharter"><i class="fa fa-check"></i><b>12.5</b> highcharter</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="Advice.html"><a href="Advice.html"><i class="fa fa-check"></i><b>13</b> Advice / Best Practices</a><ul>
+<li class="chapter" data-level="13.1" data-path="Advice.html"><a href="Advice.html#labeling"><i class="fa fa-check"></i><b>13.1</b> Labeling</a></li>
+<li class="chapter" data-level="13.2" data-path="Advice.html"><a href="Advice.html#signal-to-noise-ratio"><i class="fa fa-check"></i><b>13.2</b> Signal to noise ratio</a></li>
+<li class="chapter" data-level="13.3" data-path="Advice.html"><a href="Advice.html#ColorChoice"><i class="fa fa-check"></i><b>13.3</b> Color choice</a></li>
+<li class="chapter" data-level="13.4" data-path="Advice.html"><a href="Advice.html#y-axis-scaling"><i class="fa fa-check"></i><b>13.4</b> <em>y</em>-Axis scaling</a></li>
+<li class="chapter" data-level="13.5" data-path="Advice.html"><a href="Advice.html#attribution"><i class="fa fa-check"></i><b>13.5</b> Attribution</a></li>
+<li class="chapter" data-level="13.6" data-path="Advice.html"><a href="Advice.html#going-further"><i class="fa fa-check"></i><b>13.6</b> Going further</a></li>
+<li class="chapter" data-level="13.7" data-path="Advice.html"><a href="Advice.html#final-note"><i class="fa fa-check"></i><b>13.7</b> Final Note</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="Data.html"><a href="Data.html"><i class="fa fa-check"></i><b>A</b> Datasets</a><ul>
+<li class="chapter" data-level="A.1" data-path="Data.html"><a href="Data.html#Salaries"><i class="fa fa-check"></i><b>A.1</b> Academic salaries</a></li>
+<li class="chapter" data-level="A.2" data-path="Data.html"><a href="Data.html#Starwars"><i class="fa fa-check"></i><b>A.2</b> Starwars</a></li>
+<li class="chapter" data-level="A.3" data-path="Data.html"><a href="Data.html#Msleep"><i class="fa fa-check"></i><b>A.3</b> Mammal sleep</a></li>
+<li class="chapter" data-level="A.4" data-path="Data.html"><a href="Data.html#Marriage"><i class="fa fa-check"></i><b>A.4</b> Marriage records</a></li>
+<li class="chapter" data-level="A.5" data-path="Data.html"><a href="Data.html#MPG"><i class="fa fa-check"></i><b>A.5</b> Fuel economy data</a></li>
+<li class="chapter" data-level="A.6" data-path="Data.html"><a href="Data.html#Gapminder"><i class="fa fa-check"></i><b>A.6</b> Gapminder data</a></li>
+<li class="chapter" data-level="A.7" data-path="Data.html"><a href="Data.html#CPS85"><i class="fa fa-check"></i><b>A.7</b> Current Population Survey (1985)</a></li>
+<li class="chapter" data-level="A.8" data-path="Data.html"><a href="Data.html#HoustonCrime"><i class="fa fa-check"></i><b>A.8</b> Houston crime data</a></li>
+<li class="chapter" data-level="A.9" data-path="Data.html"><a href="Data.html#Economic"><i class="fa fa-check"></i><b>A.9</b> US economic timeseries</a></li>
+<li class="chapter" data-level="A.10" data-path="Data.html"><a href="Data.html#SaratogaHousing"><i class="fa fa-check"></i><b>A.10</b> Saratoga housing data</a></li>
+<li class="chapter" data-level="A.11" data-path="Data.html"><a href="Data.html#USpop"><i class="fa fa-check"></i><b>A.11</b> US population by age and year</a></li>
+<li class="chapter" data-level="A.12" data-path="Data.html"><a href="Data.html#Lung"><i class="fa fa-check"></i><b>A.12</b> NCCTG lung cancer data</a></li>
+<li class="chapter" data-level="A.13" data-path="Data.html"><a href="Data.html#Titanic"><i class="fa fa-check"></i><b>A.13</b> Titanic data</a></li>
+<li class="chapter" data-level="A.14" data-path="Data.html"><a href="Data.html#JFKspeech"><i class="fa fa-check"></i><b>A.14</b> JFK Cuban Missle speech</a></li>
+<li class="chapter" data-level="A.15" data-path="Data.html"><a href="Data.html#UKEnergy"><i class="fa fa-check"></i><b>A.15</b> UK Energy forecast data</a></li>
+<li class="chapter" data-level="A.16" data-path="Data.html"><a href="Data.html#MexicanAmerican"><i class="fa fa-check"></i><b>A.16</b> US Mexican American Population</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i><b>B</b> About the Author</a></li>
+<li class="chapter" data-level="C" data-path="QAC.html"><a href="QAC.html"><i class="fa fa-check"></i><b>C</b> About the QAC</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Visualization with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Models" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Statistical Models</h1>
+<p>A statistical model describes the relationship between one or more explanatory variables and one or more response variables. Graphs can help to visualize these relationships. In this section we’ll focus on models that have a single response variable that is either quantitative (a number) or binary (yes/no).</p>
+<div id="Corrplot" class="section level2">
+<h2><span class="header-section-number">8.1</span> Correlation plots</h2>
+<p>Correlation plots help you to visualize the pairwise relationships between a set of quantitative variables by displaying their correlations using color or shading.</p>
+<p>Consider the <a href="#SaratogaHouses">Saratoga Houses</a> dataset, which contains the sale price and characteristics of Saratoga County, NY homes in 2006. In order to explore the relationships among the quantitative variables, we can calculate the Pearson Product-Moment <a href="http://www.statisticshowto.com/probability-and-statistics/correlation-coefficient-formula/">correlation coefficients</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(SaratogaHouses, <span class="dt">package=</span><span class="st">&quot;mosaicData&quot;</span>)
+
+<span class="co"># select numeric variables</span>
+df &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select_if</span>(SaratogaHouses, is.numeric)
+
+<span class="co"># calulate the correlations</span>
+r &lt;-<span class="st"> </span><span class="kw">cor</span>(df, <span class="dt">use=</span><span class="st">&quot;complete.obs&quot;</span>)
+<span class="kw">round</span>(r,<span class="dv">2</span>)</code></pre></div>
+<pre><code>##            price lotSize   age landValue livingArea pctCollege bedrooms
+## price       1.00    0.16 -0.19      0.58       0.71       0.20     0.40
+## lotSize     0.16    1.00 -0.02      0.06       0.16      -0.03     0.11
+## age        -0.19   -0.02  1.00     -0.02      -0.17      -0.04     0.03
+## landValue   0.58    0.06 -0.02      1.00       0.42       0.23     0.20
+## livingArea  0.71    0.16 -0.17      0.42       1.00       0.21     0.66
+## pctCollege  0.20   -0.03 -0.04      0.23       0.21       1.00     0.16
+## bedrooms    0.40    0.11  0.03      0.20       0.66       0.16     1.00
+## fireplaces  0.38    0.09 -0.17      0.21       0.47       0.25     0.28
+## bathrooms   0.60    0.08 -0.36      0.30       0.72       0.18     0.46
+## rooms       0.53    0.14 -0.08      0.30       0.73       0.16     0.67
+##            fireplaces bathrooms rooms
+## price            0.38      0.60  0.53
+## lotSize          0.09      0.08  0.14
+## age             -0.17     -0.36 -0.08
+## landValue        0.21      0.30  0.30
+## livingArea       0.47      0.72  0.73
+## pctCollege       0.25      0.18  0.16
+## bedrooms         0.28      0.46  0.67
+## fireplaces       1.00      0.44  0.32
+## bathrooms        0.44      1.00  0.52
+## rooms            0.32      0.52  1.00</code></pre>
+<p>The <code>ggcorrplot</code> function in the <code>ggcorrplot</code> package can be used to visualize these correlations. By default, it creates a <code>ggplot2</code> graph were darker red indicates stronger positive correlations, darker blue indicates stronger negative correlations and white indicates no correlation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(ggcorrplot)
+<span class="kw">ggcorrplot</span>(r)</code></pre></div>
+<div class="figure"><span id="fig:corrplot2"></span>
+<img src="datavis_files/figure-html/corrplot2-1.png" alt="Correlation matrix" width="672" />
+<p class="caption">
+Figure 8.1: Correlation matrix
+</p>
+</div>
+<p>From the graph, an increase in number of bathrooms and living area are associated with increased price, while older homes tend to be less expensive. Older homes also tend to have fewer bathrooms.</p>
+<p>The <a href="https://www.rdocumentation.org/packages/ggcorrplot/versions/0.1.1/topics/ggcorrplot"><code>ggcorrplot</code></a> function has a number of options for customizing the output. For example</p>
+<ul>
+<li><code>hc.order = TRUE</code> reorders the variables, placing variables with similar correlation patterns together.</li>
+<li><code>type = &quot;lower&quot;</code> plots the lower portion of the correlation matrix.</li>
+<li><code>lab = TRUE</code> overlays the correlation coefficients (as text) on the plot.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggcorrplot</span>(r, 
+           <span class="dt">hc.order =</span> <span class="ot">TRUE</span>, 
+           <span class="dt">type =</span> <span class="st">&quot;lower&quot;</span>,
+           <span class="dt">lab =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="figure"><span id="fig:corrplot3"></span>
+<img src="datavis_files/figure-html/corrplot3-1.png" alt="Sorted lower triangel correlation matrix with options" width="672" />
+<p class="caption">
+Figure 8.2: Sorted lower triangel correlation matrix with options
+</p>
+</div>
+<p>These, and other <a href="https://www.rdocumentation.org/packages/ggcorrplot/versions/0.1.1/topics/ggcorrplot">options</a>, can make the graph easier to read and interpret.</p>
+</div>
+<div id="linear-regression" class="section level2">
+<h2><span class="header-section-number">8.2</span> Linear Regression</h2>
+<p>Linear regression allows us to explore the relationship between a quantitative response variable and an explanatory variable while other variables are held constant.</p>
+<p>Consider the prediction of home prices in the <a href="#SaratogaHouses">Saratoga</a> dataset from lot size (square feet), age (years), land value (1000s dollars), living area (square feet), number of bedrooms and bathrooms and whether the home is on the waterfront or not.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(SaratogaHouses, <span class="dt">package=</span><span class="st">&quot;mosaicData&quot;</span>)
+houses_lm &lt;-<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span>lotSize <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>landValue <span class="op">+</span>
+<span class="st">                  </span>livingArea <span class="op">+</span><span class="st"> </span>bedrooms <span class="op">+</span><span class="st"> </span>bathrooms <span class="op">+</span>
+<span class="st">                  </span>waterfront, 
+                <span class="dt">data =</span> SaratogaHouses)</code></pre></div>
+<table>
+<caption><span id="tab:regression2">Table 8.1: </span>Linear Regression results</caption>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">139878.80</td>
+<td align="right">16472.93</td>
+<td align="right">8.49</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">lotSize</td>
+<td align="right">7500.79</td>
+<td align="right">2075.14</td>
+<td align="right">3.61</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">age</td>
+<td align="right">-136.04</td>
+<td align="right">54.16</td>
+<td align="right">-2.51</td>
+<td align="right">0.01</td>
+</tr>
+<tr class="even">
+<td align="left">landValue</td>
+<td align="right">0.91</td>
+<td align="right">0.05</td>
+<td align="right">19.84</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">livingArea</td>
+<td align="right">75.18</td>
+<td align="right">4.16</td>
+<td align="right">18.08</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">bedrooms</td>
+<td align="right">-5766.76</td>
+<td align="right">2388.43</td>
+<td align="right">-2.41</td>
+<td align="right">0.02</td>
+</tr>
+<tr class="odd">
+<td align="left">bathrooms</td>
+<td align="right">24547.11</td>
+<td align="right">3332.27</td>
+<td align="right">7.37</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">waterfrontNo</td>
+<td align="right">-120726.62</td>
+<td align="right">15600.83</td>
+<td align="right">-7.74</td>
+<td align="right">0.00</td>
+</tr>
+</tbody>
+</table>
+<p>From the results, we can estimate that an increase of one square foot of living area is associated with a home price increase of $75, holding the other variables constant. Additionally, waterfront home cost approximately $120,726 more than non-waterfront home, again controlling for the other variables in the model.</p>
+<p>The <a href="http://pbreheny.github.io/visreg/index.html">visreg</a> package provides tools for visualizing these conditional relationships.</p>
+<p>The <code>visreg</code> function takes (1) the model and (2) the variable of interest and plots the conditional relationship, controlling for the other variables. The option <code>gg = TRUE</code> is used to produce a <code>ggplot2</code> graph.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># conditional plot of price vs. living area</span>
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(visreg)
+<span class="kw">visreg</span>(houses_lm, <span class="st">&quot;livingArea&quot;</span>, <span class="dt">gg =</span> <span class="ot">TRUE</span>) </code></pre></div>
+<div class="figure"><span id="fig:regression3"></span>
+<img src="datavis_files/figure-html/regression3-1.png" alt="Conditional plot of living area and price" width="672" />
+<p class="caption">
+Figure 8.3: Conditional plot of living area and price
+</p>
+</div>
+<p>The graph suggests that, after controlling for lot size, age, living area, number of bedrooms and bathrooms, and waterfront location, sales price increases with living area in a linear fashion.</p>
+<blockquote>
+<p><strong>How does <code>visreg</code> work?</strong> The fitted model is used to predict values of the response variable, across the range of the chosen explanatory variable. The other variables are set to their median value (for numeric variables) or most frequent category (for categorical variables). The user can override these defaults and chose specific values for any variable in the model.</p>
+</blockquote>
+<p>Continuing the example, the price difference between waterfront and non-waterfront homes is plotted, controlling for the other seven variables. Since a <code>ggplot2</code> graph is produced, other <code>ggplot2</code> functions can be added to customize the graph.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># conditional plot of price vs. waterfront location</span>
+<span class="kw">visreg</span>(houses_lm, <span class="st">&quot;waterfront&quot;</span>, <span class="dt">gg =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">label =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Relationship between price and location&quot;</span>,
+       <span class="dt">subtitle =</span> <span class="st">&quot;controlling for lot size, age, land value, bedrooms and bathrooms&quot;</span>,
+       <span class="dt">caption =</span> <span class="st">&quot;source: Saratoga Housing Data (2006)&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;Home Price&quot;</span>,
+       <span class="dt">x =</span> <span class="st">&quot;Waterfront&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:regression4"></span>
+<img src="datavis_files/figure-html/regression4-1.png" alt="Conditional plot of location and price" width="672" />
+<p class="caption">
+Figure 8.4: Conditional plot of location and price
+</p>
+</div>
+<p>There are far fewer homes on the water, and they tend to be more expensive (even controlling for size, age, and land value).</p>
+<p>The <code>visreg</code> package provides a wide range of plotting capabilities. See <a href="https://web.as.uky.edu/statistics/users/pbreheny/publications/visreg.pdf">Visualization of regression models using visreg</a> for details.</p>
+</div>
+<div id="logistic-regression" class="section level2">
+<h2><span class="header-section-number">8.3</span> Logistic regression</h2>
+<p>Logistic regression can be used to explore the relationship between a binary response variable and an explanatory variable while other variables are held constant. Binary response variables have two levels (yes/no, lived/died, pass/fail, malignant/benign). As with linear regression, we can use the <a href="http://pbreheny.github.io/visreg/index.html">visreg</a> package to visualize these relationships.</p>
+<p>Using the <a href="Data.html#CPS85">CPS85</a> data let’s predict the log-odds of being married, given one’s sex, age, race and job sector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fit logistic model for predicting</span>
+<span class="co"># marital status: married/single</span>
+<span class="kw">data</span>(CPS85, <span class="dt">package =</span> <span class="st">&quot;mosaicData&quot;</span>)
+cps85_glm &lt;-<span class="st"> </span><span class="kw">glm</span>(married <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>race <span class="op">+</span><span class="st"> </span>sector, 
+                 <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>, 
+                 <span class="dt">data=</span>CPS85)</code></pre></div>
+<p>Using the fitted model, let’s visualize the relationship between age and the probability of being married, holding the other variables constant. Again, the <code>visreg</code> function takes the model and the variable of interest and plots the conditional relationship, controlling for the other variables. The option <code>gg = TRUE</code> is used to produce a <code>ggplot2</code> graph. The <code>scale = &quot;response&quot;</code> option creates a plot based on a probability (rather than log-odds) scale.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot results</span>
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(visreg)
+<span class="kw">visreg</span>(cps85_glm, <span class="st">&quot;age&quot;</span>, 
+       <span class="dt">gg =</span> <span class="ot">TRUE</span>, 
+       <span class="dt">scale=</span><span class="st">&quot;response&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Prob(Married)&quot;</span>, 
+       <span class="dt">x =</span> <span class="st">&quot;Age&quot;</span>,
+       <span class="dt">title =</span> <span class="st">&quot;Relationship of age and marital status&quot;</span>,
+       <span class="dt">subtitle =</span> <span class="st">&quot;controlling for sex, race, and job sector&quot;</span>,
+       <span class="dt">caption =</span> <span class="st">&quot;source: Current Population Survey 1985&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:logistic2"></span>
+<img src="datavis_files/figure-html/logistic2-1.png" alt="Conditional plot of age and marital status" width="672" />
+<p class="caption">
+Figure 8.5: Conditional plot of age and marital status
+</p>
+</div>
+<p>The probability of being married is estimated to be roughly 0.5 at age 20 and decreases to 0.1 at age 60, controlling for the other variables.</p>
+<p>We can create multiple conditional plots by adding a <code>by</code> option. For example, the following code will plot the probability of being married by age, seperately for men and women, controlling for race and job sector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot results</span>
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(visreg)
+<span class="kw">visreg</span>(cps85_glm, <span class="st">&quot;age&quot;</span>,
+       <span class="dt">by =</span> <span class="st">&quot;sex&quot;</span>,
+       <span class="dt">gg =</span> <span class="ot">TRUE</span>, 
+       <span class="dt">scale=</span><span class="st">&quot;response&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Prob(Married)&quot;</span>, 
+       <span class="dt">x =</span> <span class="st">&quot;Age&quot;</span>,
+       <span class="dt">title =</span> <span class="st">&quot;Relationship of age and marital status&quot;</span>,
+       <span class="dt">subtitle =</span> <span class="st">&quot;controlling for race and job sector&quot;</span>,
+       <span class="dt">caption =</span> <span class="st">&quot;source: Current Population Survey 1985&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:logistic3"></span>
+<img src="datavis_files/figure-html/logistic3-1.png" alt="Conditional plot of age and marital status" width="672" />
+<p class="caption">
+Figure 8.6: Conditional plot of age and marital status
+</p>
+</div>
+<p>In this data, the probability of marriage is very similar for men and women.</p>
+</div>
+<div id="survival-plots" class="section level2">
+<h2><span class="header-section-number">8.4</span> Survival plots</h2>
+<p>In many research settings, the response variable is the time to an event. This is frequently true in healthcare research, where we are interested in time to recovery, time to death, or time to relapse.</p>
+<p>If the event has not occurred for an observation (either because the study ended or the patient dropped out) the observation is said to be <em>censored</em>.</p>
+<p>The <a href="Data.html#Lung"><code>NCCTG Lung Cancer</code></a> dataset in the <code>survival</code> package provides data on the survival times of patients with advanced lung cancer following treatment. The study followed patients for up 34 months.</p>
+<p>The outcome for each patient is measured by two variables</p>
+<ul>
+<li><em>time</em> - survival time in days<br />
+</li>
+<li><em>status</em> - 1=censored, 2=dead</li>
+</ul>
+<p>Thus a patient with <em>time=305 &amp; status=2</em> lived 305 days following treatment. Another patient with <em>time=400 &amp; status=1</em>, lived <strong>at least</strong> 400 days but was then lost to the study. A patient with <em>time=1022 &amp; status=1</em>, survived to the end of the study (34 months).</p>
+<p>A survival plot (also called a Kaplan-Meier Curve) can be used to illustrates the probability that an individual survives up to and including time <em>t</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot survival curve</span>
+<span class="kw">library</span>(survival)
+<span class="kw">library</span>(survminer)
+
+<span class="kw">data</span>(lung)
+sfit &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st">  </span><span class="dv">1</span>, <span class="dt">data=</span>lung)
+<span class="kw">ggsurvplot</span>(sfit,
+            <span class="dt">title=</span><span class="st">&quot;Kaplan-Meier curve for lung cancer survival&quot;</span>) </code></pre></div>
+<div class="figure"><span id="fig:survival1"></span>
+<img src="datavis_files/figure-html/survival1-1.png" alt="Basic survival curve" width="672" />
+<p class="caption">
+Figure 8.7: Basic survival curve
+</p>
+</div>
+<p>Roughly 50% of patients are still alive 300 days post treatment. Run <code>summary(sfit)</code> for more details.</p>
+<p>It is frequently of great interest whether groups of patients have the same survival probabilities. In the next graph, the survival curve for men and women are compared.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot survival curve for men and women</span>
+sfit &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(time, status) <span class="op">~</span><span class="st">  </span>sex, <span class="dt">data=</span>lung)
+<span class="kw">ggsurvplot</span>(sfit, 
+           <span class="dt">conf.int=</span><span class="ot">TRUE</span>, 
+           <span class="dt">pval=</span><span class="ot">TRUE</span>,
+           <span class="dt">legend.labs=</span><span class="kw">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>), 
+           <span class="dt">legend.title=</span><span class="st">&quot;Sex&quot;</span>,  
+           <span class="dt">palette=</span><span class="kw">c</span>(<span class="st">&quot;cornflowerblue&quot;</span>, <span class="st">&quot;indianred3&quot;</span>), 
+           <span class="dt">title=</span><span class="st">&quot;Kaplan-Meier Curve for lung cancer survival&quot;</span>,
+           <span class="dt">xlab =</span> <span class="st">&quot;Time (days)&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:survival2"></span>
+<img src="datavis_files/figure-html/survival2-1.png" alt="Comparison of survival curve" width="672" />
+<p class="caption">
+Figure 8.8: Comparison of survival curve
+</p>
+</div>
+<p>The <code>ggsurvplot</code> has many <a href="https://www.rdocumentation.org/packages/survminer/versions/0.4.2/topics/ggsurvplot">options</a>. In particular, <code>conf.int</code> provides confidence intervals, while <code>pval</code> provides a log-rank test comparing the survival curves.</p>
+<p>The p-value (0.0013) provides strong evidence that men and women have different survival probabilities following treatment.</p>
+</div>
+<div id="Mosaic" class="section level2">
+<h2><span class="header-section-number">8.5</span> Mosaic plots</h2>
+<p>Mosaic charts can display the relationship between categorical variables using rectangles whose areas represent the proportion of cases for any given combination of levels. The color of the tiles can also indicate the degree relationship among the variables.</p>
+<p>Although mosaic charts can be created with <code>ggplot2</code> using the <a href="https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html"><code>ggmosaic</code></a> package, I recommend using the <code>vcd</code> package instead. Although it won’t create <code>ggplot2</code> graphs, the package provides a more comprehensive approach to visualizing categorical data.</p>
+<p>People are fascinated with the Titanic (or is it with Leo?). In the Titanic disaster, what role did sex and class play in survival? We can visualize the relationship between these three categorical variables using the code below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># input data</span>
+<span class="kw">library</span>(readr)
+titanic &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;titanic.csv&quot;</span>)
+
+<span class="co"># create a table</span>
+tbl &lt;-<span class="st"> </span><span class="kw">xtabs</span>(<span class="op">~</span>Survived <span class="op">+</span><span class="st"> </span>Class <span class="op">+</span><span class="st"> </span>Sex, titanic)
+<span class="kw">ftable</span>(tbl)</code></pre></div>
+<pre><code>##                Sex Female Male
+## Survived Class                
+## No       1st            4  118
+##          2nd           13  154
+##          3rd          106  422
+##          Crew           3  670
+## Yes      1st          141   62
+##          2nd           93   25
+##          3rd           90   88
+##          Crew          20  192</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a mosaic plot from the table</span>
+<span class="kw">library</span>(vcd)
+<span class="kw">mosaic</span>(tbl, <span class="dt">main =</span> <span class="st">&quot;Titanic data&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:mosaicplot1"></span>
+<img src="datavis_files/figure-html/mosaicplot1-1.png" alt="Basic mosaic plot" width="672" />
+<p class="caption">
+Figure 8.9: Basic mosaic plot
+</p>
+</div>
+<p>The size of the tile is proportional to the percentage of cases in that combination of levels. Clearly more passengers perished, than survived. Those that perished were primarily 3rd class male passengers and male crew (the largest group).</p>
+<p>If we assume that these three variables are independent, we can examine the residuals from the model and shade the tiles to match. In the graph below, dark blue represents more cases than expected given independence. Dark red represents less cases than expected if independence holds.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaic</span>(tbl, 
+       <span class="dt">shade =</span> <span class="ot">TRUE</span>,
+       <span class="dt">legend =</span> <span class="ot">TRUE</span>,
+       <span class="dt">labeling_args =</span> <span class="kw">list</span>(<span class="dt">set_varnames =</span> <span class="kw">c</span>(<span class="dt">Sex =</span> <span class="st">&quot;Gender&quot;</span>,
+                                             <span class="dt">Survived =</span> <span class="st">&quot;Survived&quot;</span>,
+                                             <span class="dt">Class =</span> <span class="st">&quot;Passenger Class&quot;</span>)),
+       <span class="dt">set_labels =</span> <span class="kw">list</span>(<span class="dt">Survived =</span> <span class="kw">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>),
+                         <span class="dt">Class =</span> <span class="kw">c</span>(<span class="st">&quot;1st&quot;</span>, <span class="st">&quot;2nd&quot;</span>, <span class="st">&quot;3rd&quot;</span>, <span class="st">&quot;Crew&quot;</span>),
+                         <span class="dt">Sex =</span> <span class="kw">c</span>(<span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>)),
+       <span class="dt">main =</span> <span class="st">&quot;Titanic data&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:mosaicplot2"></span>
+<img src="datavis_files/figure-html/mosaicplot2-1.png" alt="Mosaic plot with shading" width="672" />
+<p class="caption">
+Figure 8.10: Mosaic plot with shading
+</p>
+</div>
+<p>We can see that if class, gender, and survival are independent, we are seeing many more male crew perishing, and 1st, 2nd and 3rd class females surviving than would be expected. Conversely, far fewer 1st class passengers (both male and female) died than would be expected by chance. Thus the assumption of independence is rejected. (Spoiler alert: Leo doesn’t make it.)</p>
+<p>For complicated tables, labels can easily overlap. See <a href="https://www.rdocumentation.org/packages/vcd/versions/1.4-4/topics/labeling_border"><code>labeling_border</code></a>, for plotting options.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Time.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Other.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rkabacoff/datavis/edit/master/08-models.Rmd",
+"text": "Edit"
+},
+"download": ["datavis.pdf", "datavis.epub", "datavis.mobi"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

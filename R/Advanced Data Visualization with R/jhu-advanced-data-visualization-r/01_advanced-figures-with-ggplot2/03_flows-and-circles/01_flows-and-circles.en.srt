@@ -1,0 +1,856 @@
+1
+00:00:00,140 --> 00:00:02,160
+By this point, we've done
+
+2
+00:00:02,160 --> 00:00:04,435
+a wide range of
+figures in ggplot.
+
+3
+00:00:04,435 --> 00:00:06,510
+So I think you probably
+have a good sense for
+
+4
+00:00:06,510 --> 00:00:09,000
+how powerful the
+toolkit you develop is,
+
+5
+00:00:09,000 --> 00:00:11,175
+for making data visualizations.
+
+6
+00:00:11,175 --> 00:00:12,720
+I have just a handful of
+
+7
+00:00:12,720 --> 00:00:15,630
+miscellaneous other figures
+to show you in this video,
+
+8
+00:00:15,630 --> 00:00:17,100
+and then in the next portion of
+
+9
+00:00:17,100 --> 00:00:19,740
+the course will
+cover spatial data.
+
+10
+00:00:19,740 --> 00:00:21,540
+A pretty common kind of
+
+11
+00:00:21,540 --> 00:00:23,790
+visualization that you
+see that it's good for
+
+12
+00:00:23,790 --> 00:00:26,670
+showing parts of a whole
+world connections between
+
+13
+00:00:26,670 --> 00:00:28,200
+different categories and data
+
+14
+00:00:28,200 --> 00:00:30,435
+is called an alluvial diagram.
+
+15
+00:00:30,435 --> 00:00:32,580
+This is one of those figures
+that you kind of have
+
+16
+00:00:32,580 --> 00:00:34,590
+to make to really understand.
+
+17
+00:00:34,590 --> 00:00:36,445
+Let's go ahead and get started.
+
+18
+00:00:36,445 --> 00:00:38,660
+I'm going to create
+fake data here about
+
+19
+00:00:38,660 --> 00:00:40,880
+student performance in classes.
+
+20
+00:00:40,880 --> 00:00:45,410
+I have 21 students divided
+into three groups of students.
+
+21
+00:00:45,410 --> 00:00:47,615
+The students are men and women,
+
+22
+00:00:47,615 --> 00:00:51,205
+and they get grades of
+high pass, pass or fail.
+
+23
+00:00:51,205 --> 00:00:54,660
+It takes quite a bit of
+wrangling to generate all that.
+
+24
+00:00:54,660 --> 00:00:56,630
+So pause the video here and step
+
+25
+00:00:56,630 --> 00:00:59,900
+through the lines of
+code if you need to.
+
+26
+00:00:59,900 --> 00:01:03,200
+The important thing is to
+get to the final table here,
+
+27
+00:01:03,200 --> 00:01:06,140
+and the row of this table
+tells you how many males and
+
+28
+00:01:06,140 --> 00:01:10,345
+females and each group got
+each grade in the course.
+
+29
+00:01:10,345 --> 00:01:12,320
+An alluvial diagram
+is going to show
+
+30
+00:01:12,320 --> 00:01:13,820
+you how these
+categories relate to
+
+31
+00:01:13,820 --> 00:01:14,840
+each other and how
+
+32
+00:01:14,840 --> 00:01:17,630
+collectively at all makes
+up part of the whole.
+
+33
+00:01:17,630 --> 00:01:19,460
+This is something that you just,
+
+34
+00:01:19,460 --> 00:01:21,919
+again kind of have to do
+in order to understand.
+
+35
+00:01:21,919 --> 00:01:25,590
+So bear with me and let's
+power through this.
+
+36
+00:01:25,790 --> 00:01:28,965
+The Package ggalluvial,
+
+37
+00:01:28,965 --> 00:01:31,890
+another one is helper
+packages for ggplot,
+
+38
+00:01:31,890 --> 00:01:34,910
+to provide some specialized
+tools that we need.
+
+39
+00:01:34,910 --> 00:01:39,280
+We start simply with a
+ggplot function and data.
+
+40
+00:01:39,280 --> 00:01:41,705
+The aesthetics here
+are little unusual
+
+41
+00:01:41,705 --> 00:01:44,305
+because it's the
+specialized package.
+
+42
+00:01:44,305 --> 00:01:46,740
+We have to set axis1 to the group
+
+43
+00:01:46,740 --> 00:01:49,715
+ID and axis2 to the grades,
+
+44
+00:01:49,715 --> 00:01:51,860
+and y to n,
+
+45
+00:01:51,860 --> 00:01:55,040
+which is a calculated count
+of how many males or females
+
+46
+00:01:55,040 --> 00:01:58,825
+students in each group got
+which grades in the class.
+
+47
+00:01:58,825 --> 00:02:01,100
+Are you confused yet?
+I know it's a little
+
+48
+00:02:01,100 --> 00:02:03,110
+hard to follow, but again,
+
+49
+00:02:03,110 --> 00:02:05,330
+just keep going with me and
+then we can come back and you
+
+50
+00:02:05,330 --> 00:02:07,670
+can review to put
+the pieces together,
+
+51
+00:02:07,670 --> 00:02:10,170
+after you see the
+finished product.
+
+52
+00:02:10,880 --> 00:02:15,065
+Once you have that set up,
+you can add geom_alluvium.
+
+53
+00:02:15,065 --> 00:02:17,300
+You're going to start
+to see this flow and
+
+54
+00:02:17,300 --> 00:02:20,305
+connections between
+these categories.
+
+55
+00:02:20,305 --> 00:02:22,610
+Now, obviously this
+doesn't break out
+
+56
+00:02:22,610 --> 00:02:24,065
+the categories very clearly.
+
+57
+00:02:24,065 --> 00:02:25,100
+So we have to add
+
+58
+00:02:25,100 --> 00:02:28,190
+geom_stratum to make this
+a little bit clearer,
+
+59
+00:02:28,190 --> 00:02:30,890
+and to help even further,
+
+60
+00:02:30,890 --> 00:02:32,525
+we can add text to the figure
+
+61
+00:02:32,525 --> 00:02:35,375
+using the geom_text command,
+
+62
+00:02:35,375 --> 00:02:40,660
+setting the stat as stratum
+and the label in static.
+
+63
+00:02:40,660 --> 00:02:44,770
+Like any other ggplot, we
+can also add some colors.
+
+64
+00:02:46,100 --> 00:02:49,770
+Now, I just blasted through
+that really quickly,
+
+65
+00:02:49,770 --> 00:02:52,460
+and this is really kind
+of a special usage at
+
+66
+00:02:52,460 --> 00:02:55,720
+ggplot tools that you just
+can't figure out on your own.
+
+67
+00:02:55,720 --> 00:02:57,240
+You're going to
+have to consult the
+
+68
+00:02:57,240 --> 00:02:59,390
+ggalluvium documentation
+to really get
+
+69
+00:02:59,390 --> 00:03:01,220
+a handle on the
+internal logic for
+
+70
+00:03:01,220 --> 00:03:03,500
+how the pieces of this
+figure go together.
+
+71
+00:03:03,500 --> 00:03:05,720
+There's just no replacement
+for going and very
+
+72
+00:03:05,720 --> 00:03:08,060
+carefully reading through
+and doing it on your own,
+
+73
+00:03:08,060 --> 00:03:10,210
+and trying to walk through it.
+
+74
+00:03:10,210 --> 00:03:12,350
+However, if you
+follow the examples
+
+75
+00:03:12,350 --> 00:03:13,490
+that are in the documentation,
+
+76
+00:03:13,490 --> 00:03:15,440
+you should be able to
+piece together the figure,
+
+77
+00:03:15,440 --> 00:03:18,830
+especially if your data are
+formatted in the right way,
+
+78
+00:03:18,830 --> 00:03:20,090
+aligned with the models that you
+
+79
+00:03:20,090 --> 00:03:21,995
+find in the documentation.
+
+80
+00:03:21,995 --> 00:03:24,890
+So again, going back
+to mete learning,
+
+81
+00:03:24,890 --> 00:03:25,910
+which you've been
+talking about since
+
+82
+00:03:25,910 --> 00:03:27,305
+the beginning of this course.
+
+83
+00:03:27,305 --> 00:03:29,619
+What you want to do,
+is find an example,
+
+84
+00:03:29,619 --> 00:03:31,655
+work through the
+example carefully,
+
+85
+00:03:31,655 --> 00:03:33,850
+and understand the
+internal logic for that
+
+86
+00:03:33,850 --> 00:03:36,290
+and then start to look at
+your own data and figure
+
+87
+00:03:36,290 --> 00:03:38,435
+out how to map that
+
+88
+00:03:38,435 --> 00:03:41,850
+on to the example that
+you were working with.
+
+89
+00:03:43,040 --> 00:03:45,620
+Let me show you what
+other fancy figure
+
+90
+00:03:45,620 --> 00:03:47,315
+in case you're not
+confused already,
+
+91
+00:03:47,315 --> 00:03:49,580
+and that's a pack circle plot.
+
+92
+00:03:49,580 --> 00:03:51,725
+A pack circle plot
+is sort of like
+
+93
+00:03:51,725 --> 00:03:53,960
+an alternative to
+a barplot because
+
+94
+00:03:53,960 --> 00:03:55,820
+it allows you to
+compare values across
+
+95
+00:03:55,820 --> 00:03:58,550
+units and see parts of a whole.
+
+96
+00:03:58,550 --> 00:04:01,490
+The library pack circle provides
+
+97
+00:04:01,490 --> 00:04:04,145
+the function that we need
+to make our circle plot.
+
+98
+00:04:04,145 --> 00:04:05,690
+What I'm going to do here is to
+
+99
+00:04:05,690 --> 00:04:08,120
+compare legislative
+effectiveness or
+
+100
+00:04:08,120 --> 00:04:10,370
+productivity in 25 members
+
+101
+00:04:10,370 --> 00:04:13,249
+of congress during
+the 114th Congress.
+
+102
+00:04:13,249 --> 00:04:15,830
+Again, legislative
+effectiveness more or less
+
+103
+00:04:15,830 --> 00:04:18,020
+measures how productive
+member is it making
+
+104
+00:04:18,020 --> 00:04:21,080
+laws and we're going to
+compare and see how productive
+
+105
+00:04:21,080 --> 00:04:22,700
+these members are
+relative to each
+
+106
+00:04:22,700 --> 00:04:25,330
+other into a 114th Congress.
+
+107
+00:04:25,330 --> 00:04:27,200
+This is just the exact same thing
+
+108
+00:04:27,200 --> 00:04:28,520
+that we did in the lolly plot.
+
+109
+00:04:28,520 --> 00:04:32,915
+The lolly, again, the lollipop
+plot a few videos ago.
+
+110
+00:04:32,915 --> 00:04:34,010
+We're just going to show
+
+111
+00:04:34,010 --> 00:04:36,420
+the information in
+a different way.
+
+112
+00:04:36,650 --> 00:04:39,710
+What we're going to do is
+draw a series of circles of
+
+113
+00:04:39,710 --> 00:04:42,320
+different sizes with the
+radii of the circles
+
+114
+00:04:42,320 --> 00:04:44,090
+indicating the magnitude of
+
+115
+00:04:44,090 --> 00:04:45,650
+the legislative
+effectiveness score for
+
+116
+00:04:45,650 --> 00:04:47,870
+each member in a 114th Congress.
+
+117
+00:04:47,870 --> 00:04:49,040
+A member that's very
+
+118
+00:04:49,040 --> 00:04:50,875
+productive will have
+a really big circle,
+
+119
+00:04:50,875 --> 00:04:52,250
+and then we're there's
+not as productive
+
+120
+00:04:52,250 --> 00:04:54,390
+will have a small circle.
+
+121
+00:04:54,730 --> 00:04:58,430
+To start we use a function
+in the package to get
+
+122
+00:04:58,430 --> 00:05:00,290
+the measurement for
+the circle's based on
+
+123
+00:05:00,290 --> 00:05:02,165
+the legislative
+effectiveness column,
+
+124
+00:05:02,165 --> 00:05:05,120
+the LES column of the data,
+
+125
+00:05:05,120 --> 00:05:07,130
+and the output here provides
+
+126
+00:05:07,130 --> 00:05:08,540
+the x and y points
+which are going
+
+127
+00:05:08,540 --> 00:05:11,345
+to be the center of the
+circles on our xy-plane,
+
+128
+00:05:11,345 --> 00:05:13,670
+along with the radius
+for each circle.
+
+129
+00:05:13,670 --> 00:05:15,110
+So with that data, you could
+
+130
+00:05:15,110 --> 00:05:16,970
+imagine going and putting a pin
+
+131
+00:05:16,970 --> 00:05:18,605
+in a point on the figure
+
+132
+00:05:18,605 --> 00:05:21,240
+and drawing the circle around it.
+
+133
+00:05:22,240 --> 00:05:24,410
+Now that we have
+this information,
+
+134
+00:05:24,410 --> 00:05:26,540
+we're going to put it
+back into our data using
+
+135
+00:05:26,540 --> 00:05:29,555
+the "Add Column" function
+here, and from there,
+
+136
+00:05:29,555 --> 00:05:32,600
+we use circle layout
+vertices to generate
+
+137
+00:05:32,600 --> 00:05:35,450
+even more geometric information
+which ggplot is going to
+
+138
+00:05:35,450 --> 00:05:38,845
+use to draw the edges of
+the circular polygons.
+
+139
+00:05:38,845 --> 00:05:40,280
+Because of course a circle is
+
+140
+00:05:40,280 --> 00:05:43,110
+just a polygon with
+infinite sides.
+
+141
+00:05:45,070 --> 00:05:48,725
+From here, we're
+going to call ggplot,
+
+142
+00:05:48,725 --> 00:05:51,350
+and we're going to add the
+geom_polygon function,
+
+143
+00:05:51,350 --> 00:05:53,530
+which is going to
+draw our circle here,
+
+144
+00:05:53,530 --> 00:05:55,430
+setting the data
+to the information
+
+145
+00:05:55,430 --> 00:05:56,960
+about the circles which we
+
+146
+00:05:56,960 --> 00:05:58,580
+created and saying that x and y
+
+147
+00:05:58,580 --> 00:06:00,980
+values to the center
+of those circles.
+
+148
+00:06:00,980 --> 00:06:03,685
+This is from that
+object a few lines ago.
+
+149
+00:06:03,685 --> 00:06:07,284
+We have to set here it's
+a group, aesthetic ID,
+
+150
+00:06:07,284 --> 00:06:11,570
+as well as the fill to a
+factorized version of the ID.
+
+151
+00:06:11,570 --> 00:06:13,810
+For aesthetic purposes,
+we're going to set
+
+152
+00:06:13,810 --> 00:06:16,730
+the transparency
+using alpha here.
+
+153
+00:06:16,730 --> 00:06:19,720
+Then we add geom texts
+to provide the labels
+
+154
+00:06:19,720 --> 00:06:22,880
+and we do a little
+additional visual tweaking.
+
+155
+00:06:23,480 --> 00:06:26,120
+Now this creates a
+really cool plot,
+
+156
+00:06:26,120 --> 00:06:28,720
+and there's a certain
+visual flair to this.
+
+157
+00:06:28,720 --> 00:06:31,630
+But again, it displays
+the same information as
+
+158
+00:06:31,630 --> 00:06:33,250
+a bar chart would or a lollipop
+
+159
+00:06:33,250 --> 00:06:36,050
+plot, just formatted differently.
+
+160
+00:06:36,050 --> 00:06:38,110
+I wouldn't seriously
+expect you to
+
+161
+00:06:38,110 --> 00:06:39,460
+follow all the details here,
+
+162
+00:06:39,460 --> 00:06:41,885
+but if you wanted to use this
+figure on your own work,
+
+163
+00:06:41,885 --> 00:06:43,030
+again you can consult
+
+164
+00:06:43,030 --> 00:06:46,225
+the documentation and using
+the tools you developed,
+
+165
+00:06:46,225 --> 00:06:47,800
+you could piece it together,
+
+166
+00:06:47,800 --> 00:06:49,750
+and go through the
+different components
+
+167
+00:06:49,750 --> 00:06:52,550
+of this figure and make
+it work with your data.
+
+168
+00:06:54,110 --> 00:06:57,155
+Now we come to a somewhat
+anticlimactic end
+
+169
+00:06:57,155 --> 00:06:59,390
+to all this stream
+of visualizations.
+
+170
+00:06:59,390 --> 00:07:00,920
+You might be wondering,
+
+171
+00:07:00,920 --> 00:07:02,830
+where are the pie charts?
+
+172
+00:07:02,830 --> 00:07:05,479
+While actually pie charts
+are kind of disfavored
+
+173
+00:07:05,479 --> 00:07:07,700
+among many data
+visualization specialist.
+
+174
+00:07:07,700 --> 00:07:09,965
+So I'm not emphasizing
+them in the course.
+
+175
+00:07:09,965 --> 00:07:12,020
+The problem is that
+humans are not very good
+
+176
+00:07:12,020 --> 00:07:14,075
+at comparing angles on the fly,
+
+177
+00:07:14,075 --> 00:07:17,395
+so pie charts can lead
+to bad inference.
+
+178
+00:07:17,395 --> 00:07:19,595
+But if you have to
+make a pie chart,
+
+179
+00:07:19,595 --> 00:07:21,980
+just use base R and
+the pi function,
+
+180
+00:07:21,980 --> 00:07:23,810
+just as demonstrated here.
+
+181
+00:07:23,810 --> 00:07:25,460
+This is pretty simple by
+
+182
+00:07:25,460 --> 00:07:27,410
+comparison to everything
+we've just done,
+
+183
+00:07:27,410 --> 00:07:29,420
+but you have so many skills now,
+
+184
+00:07:29,420 --> 00:07:32,610
+there's no need to settle
+for less than the best.

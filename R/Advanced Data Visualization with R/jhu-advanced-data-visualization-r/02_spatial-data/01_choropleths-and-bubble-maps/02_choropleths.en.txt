@@ -1,0 +1,50 @@
+Now that we have
+drawn maps using R, we are ready to start
+adding data to those maps. Let's get ourselves
+caught back up here, so we'll load the
+libraries we need, and we'll make a blank
+map of US states. Let's examine the US
+State map object here. This is just a data frame
+like those we've used before. This region column
+has the list of the continental US states plus
+the District of Columbia. Now to paint data into this map, we need to add some
+data to the data frame. To do this we merge some data
+into the map data frame. For example, let's
+make up some fake data that will correspond to each of the states in this region column. For demonstration purposes, I'll just make a
+sequence of letters, and so we'll create a data
+frame with three columns, region and qual_value
+for qualitative values, and quant_value for
+quantitative values. For region, we'll make
+that equal to the list of unique names in the region
+column of the map data frame. So it's just a list of the US states plus the
+District of Columbia. For the qualitative value, I'll just create a sequence of 49 letters with a few repeats. Apologies to Hawaii
+and Alaska for leaving you out here for
+demonstration purposes. You could think of
+these letters as qualitative data of some type. For the quantitative
+value column, I'll just create a
+sequence of 49 numbers. After playing with this, we have a letter and a number
+assigned to every state, and now we can merge the
+original map data frame with the values
+that we've created. We do this with a
+left_join command. If you're hazy about
+how to use Joins, you should check the
+dplyr cheat sheet and the reference materials
+on the Tidyverse. But region here is
+a linking column, so the corresponding qualitative
+and quantitative values are attached to every row that matches the corresponding state and we'll assign that
+to a new object. This is the good time to point out that you should be very careful when you're doing
+these kind of data merges. It's easy to have spelling or capitalisation or spacing errors that can really
+mess up your joins, so it's always good to check manually and make sure
+that that's working. Now, using our newly
+supplemented map data, we use a GG plot function, and this time we set
+the aesthetic to fill, and we'll drop the Fill
+command in geom_polygon. When we do this, what we have now is called a choropleth with colors filling in
+the state boundaries that correspond with
+different letter values. Because this is just a
+normal GG plot function, we can do all the same kinds of formatting we have in the past, like changing the color palette, adding a title,
+removing elements, using themes, and so on. We can also use exactly the
+same approach here for adding the continuous
+quantitative data to the map and make a
+choropleth using that. Again, you could do
+all the same kinds of refinements that
+we've seen before.

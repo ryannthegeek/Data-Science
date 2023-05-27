@@ -1,0 +1,502 @@
+library(actuar)
+detach("package:actuar", unload = TRUE)
+require(PoEdata)
+data("cps_small")
+names(cps_small)
+plot(cps_small$educ, cps_small$wage,
+xlab="education", ylab="wage")
+# a plot of wage against education
+require(ggplot2)
+ggplot() +
+geom_point(data = cps_small, aes(x = educ, y = wage))
+ggplot() +
+geom_point(data = cps_small, aes(x = educ, y = wage)) +
+ggtitle("A plot of wage against education") +
+xlab("Education") +
+ylab("Wage")
+## Example: Food Expenditure versus Income
+data("food")
+## A scatter diagram for the food expenditure versus income
+ggplot() +
+geom_point(data = food, aes(x = food_exp, y = income, type = "p")) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, max(income))) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, max(food_exp))) +
+ggtitle("A scatter plot of food expenditure against income")
+## A scatter diagram for the food expenditure versus income
+ggplot() +
+geom_point(data = food, aes(x = food_exp, y = income)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, max(income))) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, max(food_exp))) +
+ggtitle("A scatter plot of food expenditure against income")
+names(food)
+## A scatter diagram for the food expenditure versus income
+ggplot() +
+geom_point(data = food, aes(x = food_exp, y = income)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, max(income))) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, max(food_exp))) +
+ggtitle("A scatter plot of food expenditure against income")
+food$income
+## Example: Food Expenditure versus Income
+data("food")
+## A scatter diagram for the food expenditure versus income
+ggplot() +
+geom_point(data = food, aes(x = food_exp, y = income)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, max(income))) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, max(food_exp))) +
+ggtitle("A scatter plot of food expenditure against income")
+attach(food)
+names(food)
+## A scatter diagram for the food expenditure versus income
+ggplot() +
+geom_point(data = food, aes(x = food_exp, y = income)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, max(income))) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, max(food_exp))) +
+ggtitle("A scatter plot of food expenditure against income")
+attach(cps_small)
+plot(food$income, food$food_exp,
+ylim=c(0, max(food$food_exp)),
+xlim=c(0, max(food$income)),
+xlab="weekly income in $100",
+ylab="weekly food expenditure in $",
+type = "p")
+max(food_exp);max(income)
+## A scatter diagram for the food expenditure versus income
+ggplot() +
+geom_point(data = food, aes(x = income, y = food_exp)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, 34)) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, 588)) +
+ggtitle("A scatter plot of food expenditure against income")
+m1 <- lm(food_exp ~ income, data = food)
+b1 <- coef(m1)[[1]]
+b2 <- coef(m1)[[2]]
+summary_m1 <- summary(m1);summary_m1
+coef(m1)
+b0 <- coef(m1)[[1]]
+b1 <- coef(m1)[[2]]
+summary_m1 <- summary(m1);summary_m1
+coef(m1)
+## The  R  function abline() adds the regfression line
+abline(m1)
+## A scatter diagram for the food expenditure versus income
+ggplot() +
+geom_point(data = food, aes(x = income, y = food_exp)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, 34)) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, 588)) +
+ggtitle("A scatter plot of food expenditure against income")
+## A scatter diagram for the food expenditure versus income
+ggplot() +
+geom_point(data = food, aes(x = income, y = food_exp)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, 34)) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, 588)) +
+ggtitle("A scatter plot of food expenditure against income")
+## The  R  function abline() adds the regfression line
+abline(m1)
+## The  R  function abline() adds the regfression line
+abline(b0, b1)
+## A scatter diagram for the food expenditure versus income
+ggplot() +
+geom_point(data = food, aes(x = income, y = food_exp)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, 34)) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, 588)) +
+ggtitle("A scatter plot of food expenditure against income")
+## The  R  function abline() adds the regfression line
+abline(b0, b1)
+## The  R  function geom_abline() adds the regfression line
+ggplot() +
+geom_point(data = food, aes(x = income, y = food_exp)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, 34)) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, 588)) +
+geom_abline(intercept = b0, slope = b1, color = "skyblue", linetype = "dashed", size = 1.5) +
+ggtitle("A regression on food expenditure against income")
+?linetype
+## The  R  function geom_abline() adds the regfression line
+ggplot() +
+geom_point(data = food, aes(x = income, y = food_exp)) +
+scale_x_continuous(name = "weekly income in $100", limits = c(0, 34)) +
+scale_y_continuous(name = "weekly food expenditure in $", limits = c(0, 588)) +
+geom_abline(intercept = b0, slope = b1, color = "skyblue", linetype = "solid", size = 1.5) +
+ggtitle("A regression on food expenditure against income")
+## list the names of all results in each object
+names(m1)
+names(summary_m1)
+m1$coefficients
+summary_m1$coefficients
+table(summary_m1$coefficients)
+xtable(summary_m1$coefficients)
+summary_m1$coefficients
+newx <- data.frame(income = c(20, 25, 27))
+yhat <- predict(m1, newx)
+names(yhat) <- c("income=$2000", "$2500", "$2700")
+yhat  # prints the result
+N <- nrow(food);N # returns the number of observations in the dataset
+C <- 50         # desired number of subsamples
+S <- 38         # desired sample size
+sumb1 <- 0 # initial value
+for (i in 1:C){   # a loop over the number of subsamples
+set.seed(3*i)   # a different seed for each subsample
+subsample <- food[sample(1:N, size = S, replace = TRUE), ]
+m2 <- lm(food_exp ~ income, data = subsample)
+#sum b2 for all subsamples:
+sumb1 <- sumb1 + coef(m2)[[2]]
+}
+print(sumb1/C, digits = 3)
+## Many applications require estimates of the variances and covariances of the regression coefficients. R stores them in the a matrix vcov():
+varb0 <- vcov(m1)[1, 1];varb0
+varb1 <- vcov(m1)[2, 2];varb1
+covb0b1 <- vcov(m1)[1,2];covb0b1
+require(PoEdata)
+## a plot of wage against education
+require(ggplot2)
+attach(br)
+data(package = "PoEdata")
+attach(br)
+?br
+require(PoEdata)
+attach(br)
+attach(br)
+require(PoEdata)
+attach(br)
+str(br)
+br
+data(br)
+data(br)
+attach(br)
+m3 <- lm(price ~ I(sqft^2), data = br)
+b0 <- coef(m3)[[1]]
+b1 <- coef(m3)[[2]]
+sqftx = c(2000, 4000, 6000);sqftx # given values for sqft
+pricex = b0 + b1*sqftx^2;pricex # prices corresponding to given sqft
+DpriceDsqft <- 2*b2*sqftx;DpriceDsqft # marginal effect of sqft on price
+elasticity = DpriceDsqft*sqftx/pricex;elasticity
+data.df <- data.frame(sqftx, pricex, DpriceDsqft, elasticity)
+data.df <- data.frame(sqftx, pricex, DpriceDsqft, elasticity);data.df
+par.df <- data.frame(b0, b1);par.df
+DpriceDsqft <- 2*b1*sqftx;DpriceDsqft # marginal effect of sqft on price
+elasticity = DpriceDsqft*sqftx/pricex;elasticity
+par.df <- data.frame(b0, b1);par.df
+data.df <- data.frame(sqftx, pricex, DpriceDsqft, elasticity);data.df
+## a plot of wage against education
+require(ggplot2)
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("Fitting a quadratic model to the br dataset") +
+#add the quadratic curve to the scatter plot:
+geom_smooth(data = br, method = "lm", formula = y ~ b0 + I(b1*x^2))
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() +
+geom_smooth(method = "lm", formula = y ~ b0 + I(b1*x^2))
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() +
+start_smooth(method = "lm", formula = y ~ b0 + I(b1*x^2))
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() +
+stat_smooth(method = "lm", formula = y ~ b0 + I(b1*x^2))
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() +
+geom_smooth(method = "lm", formula = y ~ b0 + I(b1*x^2))
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() +
+geom_smooth(method = "lm", formula = price ~ b0 + I(b1*sqft^2))
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("Fitting a quadratic model to the br dataset") +
+#add the quadratic curve to the scatter plot:
+geom_smooth(data = br, method = "lm", formula = y ~ b0 + I(b1*x^2))
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("Fitting a quadratic model to the br dataset") +
+#add the quadratic curve to the scatter plot:
+geom_smooth(data = br, aes(x = sqft, y = price) method = "lm", formula = y ~ b0 + I(b1*x^2))
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("Fitting a quadratic model to the br dataset") +
+# add the quadratic curve to the scatter plot:
+geom_smooth(data = br, aes(x = sqft, y = price), method = "lm", formula = y ~ b0 + I(b1*x^2))
+b0
+par.df
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("A scatter plot of sale price of 1080 houses in Baton Rouge, LA against square feet")
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + # add the quadratic curve to the scatter plot
+geom_smooth(method = "lm", formula = price ~ b0 + I(b1*sqft^2)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("Fitting a quadratic model to the br dataset")
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("Fitting a quadratic model to the br dataset") +
+# add the quadratic curve to the scatter plot:
+geom_smooth(data = br, aes(x = sqft, y = price), method = "lm", formula = y ~ x + I(x^2))
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("Fitting a quadratic model to the br dataset") +
+# add the quadratic curve to the scatter plot:
+geom_smooth(data = br, aes(x = sqft, y = price), method = "lm", formula = y ~ x + I(x^2), se = F)
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("Fitting a quadratic model to the br dataset") +
+# add the quadratic curve to the scatter plot:
+geom_smooth(data = br, aes(x = sqft, y = price), method = "lm", formula = y ~ x + I(x^2), se = F, size = 1)
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price, $") +
+ggtitle("Fitting a quadratic model to the br dataset") +
+# add the quadratic curve to the scatter plot:
+geom_smooth(data = br, aes(x = sqft, y = price), method = "lm", formula = y ~ x + I(x^2), se = F, size = 1.5)
+ggplot() +
+geom_point(data = br, aes(x = sqft, y = price)) +
+xlab("Totalsquare feet") +
+ylab("Sale price in $") +
+ggtitle("A scatter plot of sale price of 1080 houses in Baton Rouge, LA against square feet")
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + # add the quadratic curve to the scatter plot
+geom_smooth(method = "lm", formula = y ~ x + I(x^2)) +
+xlab("Totalsquare feet") +
+ylab("Sale price in $") +
+ggtitle("Fitting a quadratic model to the br dataset")
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + # add the quadratic curve to the scatter plot
+geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = F) +
+xlab("Totalsquare feet") +
+ylab("Sale price in $") +
+ggtitle("Fitting a quadratic model to the br dataset")
+## Histogram of price
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_histogram() +
+xlab("Totalsquare feet") +
+ylab("Sale price in $")
+## Histogram of price
+ggplot(data = br, aes(y = price)) +
+geom_histogram() +
+xlab("Totalsquare feet") +
+ylab("Sale price in $")
+## Histogram of price
+ggplot(data = br, aes(x = price)) +
+geom_histogram() +
+xlab("Totalsquare feet") +
+ylab("Sale price in $")
+## Histogram of price
+ggplot(data = br, aes(x = price)) +
+geom_histogram()
+## Histogram of log price
+ggplot(data = br, aes(x = log(price))) +
+geom_histogram()
+m4 <- lm(log(price) ~ sqft, data = br)
+coef(m4)
+summary(m4)
+## draw the fitted values curve of the loglinear model
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + #  fitted values curve of the loglinear model
+geom_smooth(method = "lm", formula = log(y) ~ x) +
+xlab("Totalsquare feet") +
+ylab("Log price") +
+ggtitle("The fitted value curve in the log-linear model")
+## draw the fitted values curve of the loglinear model
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + #  fitted values curve of the loglinear model
+geom_smooth(method = "lm", formula = log(y) ~ x) +
+xlab("Totalsquare feet") +
+ylab("Log price") +
+ggtitle("The fitted value curve in the log-linear model")
+ordat <- br[order(br$sqft), ] #order the dataset
+plot(br$sqft, br$price, col = "grey")
+lines(exp(fitted(m4)) ~ ordat$sqft,
+col = "blue", main = "Log-linear Model")
+ordat <- br[order(br$sqft), ] #order the dataset
+plot(br$sqft, br$price, col = "grey")
+lines(exp(fitted(m4)) ~ ordat$sqft,
+col = "blue", main = "Log-linear Model")
+lines(exp(m4) ~ ordat$sqft,
+col = "blue", main = "Log-linear Model")
+b0 <- coef(m4)[[1]]
+b1 <- coef(m4)[[2]]
+#pick a few values for sqft:
+sqftx <- c(2000, 3000, 4000)
+#estimate prices for those and add one more:
+pricex <- c(100000, exp(b0+b1*sqftx))
+#re-calculate sqft for all prices:
+sqftx <- (log(pricex)-b1)/b2
+#pick a few values for sqft:
+sqftx <- c(2000, 3000, 4000)
+#estimate prices for those and add one more:
+pricex <- c(100000, exp(b0+b1*sqftx))
+#re-calculate sqft for all prices:
+sqftx <- (log(pricex)-b0)/b1
+#calculate and print elasticities:
+elasticities <- b1*sqftx
+#calculate and print elasticities:
+(elasticities <- b1*sqftx)
+(t <- 2*4)
+?utown
+attach(utown)
+data("utown")
+attach(utown)
+price0bar <- mean(utown$price[which(utown$utown == 0)])
+price1bar <- mean(utown$price[which(utown$utown == 1)])
+prices.df <- data.frame(price0bar, price1bar);prices.df
+## The results are: price¯¯¯¯¯¯¯¯¯¯¯=277.24  close to university, and  price¯¯¯¯¯¯¯¯¯¯¯=215.73  for those not close.
+## fitting a regression model
+m5 <- lm(price ~ utown, data = utown)
+b0 <- coef(m5)[[1]]
+b1 <- coef(m5)[[2]]
+require(PoEdata)
+attach(cps_small)
+names(cps_small)
+## a plot of wage against education
+require(ggplot2)
+ggplot() +
+geom_point(data = cps_small, aes(x = educ, y = wage)) +
+ggtitle("A plot of wage against education") +
+xlab("Education") +
+ylab("Wage")
+data("cps_small")
+attach(cps_small)
+require(devtools)
+require(githubinstall)
+devtools::install_github("nwstephens/rmdcss")
+install.packages("rmarkdown")
+install.packages("rmarkdown")
+install.packages("prettydoc")
+remotes::install_github('rstudio/pagedown')
+unlink("Principles of Economics with R pdf_cache", recursive = TRUE)
+install.packages("tinytex")
+tinytex::parse_install(
+text = "! LaTeX Error: File `unicode-math.sty' not found."
+)
+install.packages("devtools")
+devtools::install_git(
+"https://github.com/ccolonescu/PoEdata")
+require(devtools)
+install_git("https://github.com/ccolonescu/PoEdata")
+install.packages(bookdown)
+#li(PoEdata)
+install.packages(knitr)
+install.packages(xtable)
+install.packages(printr)
+install.packages(stargazer)
+install.packages(rmarkdown)
+install.packages("bookdown")
+install.packages("xtable")
+install.packages("printr")
+install.packages("stargazer")
+remotes::install_github('rstudio/tinytex')
+# Monte Carlo Simulation
+print("ter")
+# Monte Carlo Simulation
+print("ter")
+# Monte Carlo Simulation
+print("ter")
+# Monte Carlo Simulation
+print("ter")
+install.packages("float")
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + # add the quadratic curve to the scatter plot
+geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = F) +
+xlab("Totalsquare feet") +
+ylab("Sale price in $") +
+ggtitle("Fitting a quadratic model to the br dataset")
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + # add the quadratic curve to the scatter plot
+geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = F) +
+xlab("Totalsquare feet") +
+ylab("Sale price in $") +
+ggtitle("Fitting a quadratic model to the br dataset")
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + # add the quadratic curve to the scatter plot
+geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = F) +
+xlab("Totalsquare feet") +
+ylab("Sale price in $") +
+ggtitle("Fitting a quadratic model to the br dataset")
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + # add the quadratic curve to the scatter plot
+geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = F) +
+xlab("Totalsquare feet") +
+ylab("Sale price in $") +
+ggtitle("Fitting a quadratic model to the br dataset")
+library(tidyverse)
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + # add the quadratic curve to the scatter plot
+geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = F) +
+xlab("Totalsquare feet") +
+ylab("Sale price in $") +
+ggtitle("Fitting a quadratic model to the br dataset")
+ggplot(data = br, aes(x = sqft, y = price)) +
+geom_point() + # add the quadratic curve to the scatter plot
+geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = F) +
+xlab("Totalsquare feet") +
+ylab("Sale price in $") +
+ggtitle("Fitting a quadratic model to the br dataset")
+ordat <- br[order(br$sqft), ] #order the dataset
+plot(br$sqft, br$price, col = "grey")
+lines(exp(fitted(m4)) ~ ordat$sqft,
+col = "blue", main = "Log-linear Model")
+b0 <- coef(m4)[[1]]
+b1 <- coef(m4)[[2]]
+#pick a few values for sqft:
+sqftx <- c(2000, 3000, 4000)
+#estimate prices for those and add one more:
+pricex <- c(100000, exp(b0+b1*sqftx))
+#re-calculate sqft for all prices:
+sqftx <- (log(pricex)-b0)/b1
+install.packages("kableExtra")
+remotes::install_github("haozhu233/kableExtra")
+require(devtools)
+install_github("haozhu233/kableExtra")
+knitr::opts_chunk$set(echo = TRUE)
+iris2 <- iris[1:5, c(1, 3, 2, 4, 5)]
+names(iris2) <- gsub('[.].+', '', names(iris2))
+kable(iris2, booktabs = TRUE) %>%
+add_header_above(c("Length" = 2, "Width" = 2, " " = 1)) %>%
+add_header_above(c("Measurements" = 4, "More attributes" = 1))
+library(kableExtra)
+iris2 <- iris[1:5, c(1, 3, 2, 4, 5)]
+names(iris2) <- gsub('[.].+', '', names(iris2))
+kable(iris2, booktabs = TRUE) %>%
+add_header_above(c("Length" = 2, "Width" = 2, " " = 1)) %>%
+add_header_above(c("Measurements" = 4, "More attributes" = 1))
+install.packages("flexsurv")
+library("flexsurv")
+install.packages("deSolve")
+library("flexsurv")
+install.packages("mstate")
+library("flexsurv")
+library("flexsurv")
+library("flexsurv")
+haz_gomp <- hazfun(flexsurv::hgompertz,
+list(rate = seq(.5, 3, .5),
+shape = seq(-2, 2, .5)),
+times = times)
+install.packages("bshazard")
+install.packages("Epi")
+install.packages("biostat3")
+haz_gomp <- hazfun(flexsurv::hgompertz,
+list(rate = seq(.5, 3, .5),
+shape = seq(-2, 2, .5)),
+times = times)
+library("flexsurv")
+haz_gomp <- hazfun(flexsurv::hgompertz,
+list(rate = seq(.5, 3, .5),
+shape = seq(-2, 2, .5)),
+times = times)
+mapply(flexsurv::hweibull,
+shape = c(.5, 1, 1.5),
+scale = c(.25, 1, 1.75),
+MoreArgs = list(x = 1:2))

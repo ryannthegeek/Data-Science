@@ -1,0 +1,447 @@
+1
+00:00:01,530 --> 00:00:05,555
+When you're making an animation with
+gganimate, one of the choices you have to
+
+2
+00:00:05,555 --> 00:00:09,720
+make is how you want to transition between
+the different frames in the animation.
+
+3
+00:00:10,840 --> 00:00:14,240
+In the example in the last video
+we used transition states,
+
+4
+00:00:14,240 --> 00:00:17,980
+which is intended to use primarily
+with categorical variables.
+
+5
+00:00:17,980 --> 00:00:22,574
+So when you want to flip through
+different categorical variables when you
+
+6
+00:00:22,574 --> 00:00:24,390
+are making your animation.
+
+7
+00:00:26,110 --> 00:00:30,805
+Importantly, transition states pauses
+between each of the different values of
+
+8
+00:00:30,805 --> 00:00:34,840
+that variable, so
+you have a series of fixed images.
+
+9
+00:00:34,840 --> 00:00:38,255
+And you can control the link for
+each transition and
+
+10
+00:00:38,255 --> 00:00:43,340
+the amount of time spent on each of
+the states using the transition length and
+
+11
+00:00:43,340 --> 00:00:46,930
+state length arguments or
+options in that function.
+
+12
+00:00:48,120 --> 00:00:52,903
+If you modify these, you'll see that the
+animation will linger for longer or take
+
+13
+00:00:52,903 --> 00:00:57,618
+longer to move between a different images
+depending on the values that you use for
+
+14
+00:00:57,618 --> 00:00:58,610
+those options.
+
+15
+00:01:01,420 --> 00:01:06,043
+Another option for the transition
+functions is to use transition time
+
+16
+00:01:06,043 --> 00:01:09,140
+instead of transition states.
+
+17
+00:01:09,140 --> 00:01:13,294
+Transition time is a special function
+that's intended for temporal data.
+
+18
+00:01:13,294 --> 00:01:17,830
+So again hours, minutes, days,
+weeks months, years, etc.
+
+19
+00:01:19,320 --> 00:01:22,914
+With transition time,
+you indicate the temporal variable and
+
+20
+00:01:22,914 --> 00:01:27,470
+then the function will take care of the
+timing for the transition links for you.
+
+21
+00:01:30,400 --> 00:01:34,456
+There is a good example of transition
+time in the gganimate documentation, but
+
+22
+00:01:34,456 --> 00:01:35,968
+to give you a second example,
+
+23
+00:01:35,968 --> 00:01:39,980
+I'll use some of the data we've been
+working with about members of Congress.
+
+24
+00:01:41,140 --> 00:01:45,908
+Let's say that I wanted to track the
+number of Democrats and Republicans across
+
+25
+00:01:45,908 --> 00:01:50,480
+Congresses, which changes every two
+years depending on election cycles.
+
+26
+00:01:52,700 --> 00:01:56,353
+So we know we have a column in
+this data which is called dim,
+
+27
+00:01:56,353 --> 00:02:02,100
+which equals 1 if a member is a Democrat
+and 0 if the member is a Republican.
+
+28
+00:02:02,100 --> 00:02:05,801
+And for ease here, I'm going to use re
+code to make a new party variable with
+
+29
+00:02:05,801 --> 00:02:08,540
+a categorical value for
+Democrats and Republicans.
+
+30
+00:02:10,050 --> 00:02:11,385
+This should all be review for you, so
+
+31
+00:02:11,385 --> 00:02:13,160
+I'm kind of going through
+a little bit quickly.
+
+32
+00:02:16,360 --> 00:02:20,248
+Now I'll use group by an summarize
+to create a summary table
+
+33
+00:02:20,248 --> 00:02:22,893
+that reports the number of Democrats and
+
+34
+00:02:22,893 --> 00:02:27,590
+Republicans in a series of years,
+and I'm going to call this Cong_dot.
+
+35
+00:02:28,700 --> 00:02:31,538
+So now I have this table with the year,
+the party and
+
+36
+00:02:31,538 --> 00:02:35,440
+the number of seats that the party
+has in each one of these Congresses.
+
+37
+00:02:38,710 --> 00:02:43,174
+I use ggplot here to draw a stacked bar
+plot that shows the number of Democrats
+
+38
+00:02:43,174 --> 00:02:45,285
+and Republicans in each Congress.
+
+39
+00:02:45,285 --> 00:02:50,194
+And I'm also going to use geom_hline
+to draw a horizontal line at 217,
+
+40
+00:02:50,194 --> 00:02:54,714
+which is the threshold for
+having a majority of seats in the house.
+
+41
+00:02:58,920 --> 00:03:03,500
+Now let's animate this using
+transition time with the year variable.
+
+42
+00:03:04,950 --> 00:03:07,738
+We'll save this to an object
+an when we run it,
+
+43
+00:03:07,738 --> 00:03:13,090
+R will render the figure showing the
+transitions for the figure across years.
+
+44
+00:03:13,090 --> 00:03:17,909
+This is pretty cool and observant
+learners here will notice that the total
+
+45
+00:03:17,909 --> 00:03:22,880
+number of members of Congress does vary
+little bit and this is because of a few
+
+46
+00:03:22,880 --> 00:03:27,172
+quirks in the data with members
+that enter or leave mid Congress.
+
+47
+00:03:27,172 --> 00:03:30,391
+There are always 435 seats in
+the House of Representatives but
+
+48
+00:03:30,391 --> 00:03:33,210
+it changed a little bit because
+of that quirk in the data.
+
+49
+00:03:36,270 --> 00:03:39,879
+There are a few other transition types
+that you will find in the documentation
+
+50
+00:03:39,879 --> 00:03:40,712
+for gganimates,
+
+51
+00:03:40,712 --> 00:03:44,730
+but I'll just walk through one additional
+example here for illustrative purposes.
+
+52
+00:03:45,770 --> 00:03:50,615
+transition_layer will allow you to build
+up a plot layer by layer with layer here,
+
+53
+00:03:50,615 --> 00:03:55,270
+meaning the different functions that you
+add to a sequence of ggplot commands.
+
+54
+00:03:57,030 --> 00:04:00,813
+To show you what I mean here,
+let's take the Congress data again.
+
+55
+00:04:00,813 --> 00:04:04,263
+And this time I'm going to make
+a scatter plot of seniority for
+
+56
+00:04:04,263 --> 00:04:07,506
+each member,
+which again means how long that member has
+
+57
+00:04:07,506 --> 00:04:12,280
+been in Congress against how many bills
+a member passed in the 115th Congress?
+
+58
+00:04:13,590 --> 00:04:16,537
+As I've said, other things being equal,
+you would expect for
+
+59
+00:04:16,537 --> 00:04:19,985
+members who have been in Congress for
+longer to be more productive, and so
+
+60
+00:04:19,985 --> 00:04:22,063
+we should see a positive correlation here.
+
+61
+00:04:25,736 --> 00:04:29,489
+The final product for
+that ggplot figure looks like this and
+
+62
+00:04:29,489 --> 00:04:33,619
+it's a jittered scatter plot of
+members in the 115th Congress
+
+63
+00:04:33,619 --> 00:04:37,692
+with Republican members in red and
+Democratic members in blue.
+
+64
+00:04:37,692 --> 00:04:42,120
+Along with that I've used the geom_smooth
+function to draw a best fit line through
+
+65
+00:04:42,120 --> 00:04:43,139
+the scatter plot.
+
+66
+00:04:43,139 --> 00:04:46,460
+One for Republican members and
+one for Democratic members.
+
+67
+00:04:47,670 --> 00:04:52,041
+What this seems to indicate is that for
+Republicans in the 115th Congress,
+
+68
+00:04:52,041 --> 00:04:55,554
+being more senior was associated
+with more productivity, but
+
+69
+00:04:55,554 --> 00:04:59,480
+that association didn't hold very
+strongly or at all for Democrats.
+
+70
+00:05:00,730 --> 00:05:04,545
+If you're curious, you can explain
+this because in the 115th Congress,
+
+71
+00:05:04,545 --> 00:05:06,248
+Republicans are in the majority,
+
+72
+00:05:06,248 --> 00:05:09,730
+so they had more power to make laws
+than their Democratic colleagues.
+
+73
+00:05:11,740 --> 00:05:15,849
+When you look at the R code for this and
+the sequence of ggplot commands,
+
+74
+00:05:15,849 --> 00:05:18,931
+you can see that we didn't
+specify the aesthetics and
+
+75
+00:05:18,931 --> 00:05:22,381
+the data in the initial ggplot
+function like we had before.
+
+76
+00:05:22,381 --> 00:05:26,853
+Instead, we did so in in each
+different layer of the plot, and
+
+77
+00:05:26,853 --> 00:05:31,669
+that's because we wanted to be very
+specific about the data that we
+
+78
+00:05:31,669 --> 00:05:34,780
+wanted to use for
+each layer in the figure.
+
+79
+00:05:37,890 --> 00:05:42,226
+So once you've got this all set up using
+the transition for the layers is easy.
+
+80
+00:05:42,226 --> 00:05:46,484
+All you have to do is include a
+transition_layers function in your ggplot
+
+81
+00:05:46,484 --> 00:05:51,292
+string, and with that you can render the
+figure and you'll see that the figure will
+
+82
+00:05:51,292 --> 00:05:55,430
+build up layer by layer moving down
+through your sequence of commands.
+
+83
+00:05:59,210 --> 00:06:03,065
+You'll find if you look in the
+documentation for this function that there
+
+84
+00:06:03,065 --> 00:06:07,291
+are options for controlling the length of
+time that the animation studies on each
+
+85
+00:06:07,291 --> 00:06:11,640
+layer, and for controlling the length of
+the transitions between the layers along
+
+86
+00:06:11,640 --> 00:06:14,900
+with a few other options that
+you can investigate on your own.
+
+87
+00:06:16,430 --> 00:06:18,979
+This video should have
+given you an intuition for
+
+88
+00:06:18,979 --> 00:06:22,100
+how the different transition
+options work with ggnimate.
+
+89
+00:06:22,100 --> 00:06:25,713
+And for self study you can refer to
+the gganimate documentation to see
+
+90
+00:06:25,713 --> 00:06:26,967
+other possibilities.
+
+91
+00:06:26,967 --> 00:06:31,038
+We'll continue with some more tweaks
+to gganimate in the next video, so
+
+92
+00:06:31,038 --> 00:06:34,990
+keep this R code open and I look forward
+to seeing you in the next video.

@@ -1,0 +1,122 @@
+By this point, we've done a wide range of
+figures in ggplot. So I think you probably
+have a good sense for how powerful the
+toolkit you develop is, for making data visualizations. I have just a handful of miscellaneous other figures
+to show you in this video, and then in the next portion of the course will
+cover spatial data. A pretty common kind of visualization that you
+see that it's good for showing parts of a whole
+world connections between different categories and data is called an alluvial diagram. This is one of those figures
+that you kind of have to make to really understand. Let's go ahead and get started. I'm going to create
+fake data here about student performance in classes. I have 21 students divided
+into three groups of students. The students are men and women, and they get grades of
+high pass, pass or fail. It takes quite a bit of
+wrangling to generate all that. So pause the video here and step through the lines of
+code if you need to. The important thing is to
+get to the final table here, and the row of this table
+tells you how many males and females and each group got
+each grade in the course. An alluvial diagram
+is going to show you how these
+categories relate to each other and how collectively at all makes
+up part of the whole. This is something that you just, again kind of have to do
+in order to understand. So bear with me and let's
+power through this. The Package ggalluvial, another one is helper
+packages for ggplot, to provide some specialized
+tools that we need. We start simply with a
+ggplot function and data. The aesthetics here
+are little unusual because it's the
+specialized package. We have to set axis1 to the group ID and axis2 to the grades, and y to n, which is a calculated count
+of how many males or females students in each group got
+which grades in the class. Are you confused yet?
+I know it's a little hard to follow, but again, just keep going with me and
+then we can come back and you can review to put
+the pieces together, after you see the
+finished product. Once you have that set up,
+you can add geom_alluvium. You're going to start
+to see this flow and connections between
+these categories. Now, obviously this
+doesn't break out the categories very clearly. So we have to add geom_stratum to make this
+a little bit clearer, and to help even further, we can add text to the figure using the geom_text command, setting the stat as stratum
+and the label in static. Like any other ggplot, we
+can also add some colors. Now, I just blasted through
+that really quickly, and this is really kind
+of a special usage at ggplot tools that you just
+can't figure out on your own. You're going to
+have to consult the ggalluvium documentation
+to really get a handle on the
+internal logic for how the pieces of this
+figure go together. There's just no replacement
+for going and very carefully reading through
+and doing it on your own, and trying to walk through it. However, if you
+follow the examples that are in the documentation, you should be able to
+piece together the figure, especially if your data are
+formatted in the right way, aligned with the models that you find in the documentation. So again, going back
+to mete learning, which you've been
+talking about since the beginning of this course. What you want to do,
+is find an example, work through the
+example carefully, and understand the
+internal logic for that and then start to look at
+your own data and figure out how to map that on to the example that
+you were working with. Let me show you what
+other fancy figure in case you're not
+confused already, and that's a pack circle plot. A pack circle plot
+is sort of like an alternative to
+a barplot because it allows you to
+compare values across units and see parts of a whole. The library pack circle provides the function that we need
+to make our circle plot. What I'm going to do here is to compare legislative
+effectiveness or productivity in 25 members of congress during
+the 114th Congress. Again, legislative
+effectiveness more or less measures how productive
+member is it making laws and we're going to
+compare and see how productive these members are
+relative to each other into a 114th Congress. This is just the exact same thing that we did in the lolly plot. The lolly, again, the lollipop
+plot a few videos ago. We're just going to show the information in
+a different way. What we're going to do is
+draw a series of circles of different sizes with the
+radii of the circles indicating the magnitude of the legislative
+effectiveness score for each member in a 114th Congress. A member that's very productive will have
+a really big circle, and then we're there's
+not as productive will have a small circle. To start we use a function
+in the package to get the measurement for
+the circle's based on the legislative
+effectiveness column, the LES column of the data, and the output here provides the x and y points
+which are going to be the center of the
+circles on our xy-plane, along with the radius
+for each circle. So with that data, you could imagine going and putting a pin in a point on the figure and drawing the circle around it. Now that we have
+this information, we're going to put it
+back into our data using the "Add Column" function
+here, and from there, we use circle layout
+vertices to generate even more geometric information
+which ggplot is going to use to draw the edges of
+the circular polygons. Because of course a circle is just a polygon with
+infinite sides. From here, we're
+going to call ggplot, and we're going to add the
+geom_polygon function, which is going to
+draw our circle here, setting the data
+to the information about the circles which we created and saying that x and y values to the center
+of those circles. This is from that
+object a few lines ago. We have to set here it's
+a group, aesthetic ID, as well as the fill to a
+factorized version of the ID. For aesthetic purposes,
+we're going to set the transparency
+using alpha here. Then we add geom texts
+to provide the labels and we do a little
+additional visual tweaking. Now this creates a
+really cool plot, and there's a certain
+visual flair to this. But again, it displays
+the same information as a bar chart would or a lollipop plot, just formatted differently. I wouldn't seriously
+expect you to follow all the details here, but if you wanted to use this
+figure on your own work, again you can consult the documentation and using
+the tools you developed, you could piece it together, and go through the
+different components of this figure and make
+it work with your data. Now we come to a somewhat
+anticlimactic end to all this stream
+of visualizations. You might be wondering, where are the pie charts? While actually pie charts
+are kind of disfavored among many data
+visualization specialist. So I'm not emphasizing
+them in the course. The problem is that
+humans are not very good at comparing angles on the fly, so pie charts can lead
+to bad inference. But if you have to
+make a pie chart, just use base R and
+the pi function, just as demonstrated here. This is pretty simple by comparison to everything
+we've just done, but you have so many skills now, there's no need to settle
+for less than the best.

@@ -1,0 +1,340 @@
+1
+00:00:00,000 --> 00:00:03,030
+Now that we have
+drawn maps using R,
+
+2
+00:00:03,030 --> 00:00:06,135
+we are ready to start
+adding data to those maps.
+
+3
+00:00:06,135 --> 00:00:08,700
+Let's get ourselves
+caught back up here,
+
+4
+00:00:08,700 --> 00:00:10,695
+so we'll load the
+libraries we need,
+
+5
+00:00:10,695 --> 00:00:14,260
+and we'll make a blank
+map of US states.
+
+6
+00:00:14,480 --> 00:00:18,585
+Let's examine the US
+State map object here.
+
+7
+00:00:18,585 --> 00:00:22,485
+This is just a data frame
+like those we've used before.
+
+8
+00:00:22,485 --> 00:00:25,740
+This region column
+has the list of
+
+9
+00:00:25,740 --> 00:00:29,890
+the continental US states plus
+the District of Columbia.
+
+10
+00:00:30,620 --> 00:00:33,915
+Now to paint data into this map,
+
+11
+00:00:33,915 --> 00:00:37,410
+we need to add some
+data to the data frame.
+
+12
+00:00:37,660 --> 00:00:42,185
+To do this we merge some data
+into the map data frame.
+
+13
+00:00:42,185 --> 00:00:45,725
+For example, let's
+make up some fake data
+
+14
+00:00:45,725 --> 00:00:47,450
+that will correspond to each of
+
+15
+00:00:47,450 --> 00:00:50,095
+the states in this region column.
+
+16
+00:00:50,095 --> 00:00:52,325
+For demonstration purposes,
+
+17
+00:00:52,325 --> 00:00:54,895
+I'll just make a
+sequence of letters,
+
+18
+00:00:54,895 --> 00:00:58,440
+and so we'll create a data
+frame with three columns,
+
+19
+00:00:58,440 --> 00:01:02,785
+region and qual_value
+for qualitative values,
+
+20
+00:01:02,785 --> 00:01:06,850
+and quant_value for
+quantitative values.
+
+21
+00:01:06,850 --> 00:01:10,280
+For region, we'll make
+that equal to the list of
+
+22
+00:01:10,280 --> 00:01:13,865
+unique names in the region
+column of the map data frame.
+
+23
+00:01:13,865 --> 00:01:15,530
+So it's just a list of
+
+24
+00:01:15,530 --> 00:01:18,630
+the US states plus the
+District of Columbia.
+
+25
+00:01:19,090 --> 00:01:21,785
+For the qualitative value,
+
+26
+00:01:21,785 --> 00:01:23,225
+I'll just create a sequence of
+
+27
+00:01:23,225 --> 00:01:26,345
+49 letters with a few repeats.
+
+28
+00:01:26,345 --> 00:01:29,060
+Apologies to Hawaii
+and Alaska for
+
+29
+00:01:29,060 --> 00:01:32,260
+leaving you out here for
+demonstration purposes.
+
+30
+00:01:32,260 --> 00:01:34,715
+You could think of
+these letters as
+
+31
+00:01:34,715 --> 00:01:37,235
+qualitative data of some type.
+
+32
+00:01:37,235 --> 00:01:39,560
+For the quantitative
+value column,
+
+33
+00:01:39,560 --> 00:01:43,020
+I'll just create a
+sequence of 49 numbers.
+
+34
+00:01:43,820 --> 00:01:45,950
+After playing with this,
+
+35
+00:01:45,950 --> 00:01:49,595
+we have a letter and a number
+assigned to every state,
+
+36
+00:01:49,595 --> 00:01:52,565
+and now we can merge the
+original map data frame
+
+37
+00:01:52,565 --> 00:01:55,105
+with the values
+that we've created.
+
+38
+00:01:55,105 --> 00:01:58,140
+We do this with a
+left_join command.
+
+39
+00:01:58,140 --> 00:02:00,195
+If you're hazy about
+how to use Joins,
+
+40
+00:02:00,195 --> 00:02:02,300
+you should check the
+dplyr cheat sheet
+
+41
+00:02:02,300 --> 00:02:05,610
+and the reference materials
+on the Tidyverse.
+
+42
+00:02:05,780 --> 00:02:09,315
+But region here is
+a linking column,
+
+43
+00:02:09,315 --> 00:02:12,050
+so the corresponding qualitative
+and quantitative values
+
+44
+00:02:12,050 --> 00:02:13,850
+are attached to every row that
+
+45
+00:02:13,850 --> 00:02:16,130
+matches the corresponding state
+
+46
+00:02:16,130 --> 00:02:19,740
+and we'll assign that
+to a new object.
+
+47
+00:02:20,060 --> 00:02:22,160
+This is the good time to point
+
+48
+00:02:22,160 --> 00:02:23,180
+out that you should be very
+
+49
+00:02:23,180 --> 00:02:25,565
+careful when you're doing
+these kind of data merges.
+
+50
+00:02:25,565 --> 00:02:27,230
+It's easy to have spelling or
+
+51
+00:02:27,230 --> 00:02:29,075
+capitalisation or spacing errors
+
+52
+00:02:29,075 --> 00:02:30,600
+that can really
+mess up your joins,
+
+53
+00:02:30,600 --> 00:02:31,940
+so it's always good to check
+
+54
+00:02:31,940 --> 00:02:34,800
+manually and make sure
+that that's working.
+
+55
+00:02:36,100 --> 00:02:39,935
+Now, using our newly
+supplemented map data,
+
+56
+00:02:39,935 --> 00:02:42,335
+we use a GG plot function,
+
+57
+00:02:42,335 --> 00:02:45,190
+and this time we set
+the aesthetic to fill,
+
+58
+00:02:45,190 --> 00:02:50,000
+and we'll drop the Fill
+command in geom_polygon.
+
+59
+00:02:50,000 --> 00:02:52,520
+When we do this, what we have now
+
+60
+00:02:52,520 --> 00:02:54,200
+is called a choropleth with
+
+61
+00:02:54,200 --> 00:02:56,165
+colors filling in
+the state boundaries
+
+62
+00:02:56,165 --> 00:02:59,215
+that correspond with
+different letter values.
+
+63
+00:02:59,215 --> 00:03:02,510
+Because this is just a
+normal GG plot function,
+
+64
+00:03:02,510 --> 00:03:03,980
+we can do all the same kinds of
+
+65
+00:03:03,980 --> 00:03:05,585
+formatting we have in the past,
+
+66
+00:03:05,585 --> 00:03:07,325
+like changing the color palette,
+
+67
+00:03:07,325 --> 00:03:09,365
+adding a title,
+removing elements,
+
+68
+00:03:09,365 --> 00:03:12,060
+using themes, and so on.
+
+69
+00:03:12,140 --> 00:03:15,710
+We can also use exactly the
+same approach here for adding
+
+70
+00:03:15,710 --> 00:03:17,420
+the continuous
+quantitative data to
+
+71
+00:03:17,420 --> 00:03:20,240
+the map and make a
+choropleth using that.
+
+72
+00:03:20,240 --> 00:03:22,670
+Again, you could do
+all the same kinds
+
+73
+00:03:22,670 --> 00:03:25,530
+of refinements that
+we've seen before.
