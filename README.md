@@ -28,7 +28,8 @@ In this repository, you can expect to find a diverse range of projects that demo
 
 I'm always eager to connect with fellow data enthusiasts, industry professionals, and researchers. Please feel free to reach out if you have any questions, project proposals, or simply want to discuss the latest developments in data science.
 
-- LinkedIn: www.linkedin.com/in/brian-chege-gitu
+- Fiverr: https://www.fiverr.com/ryannthegeek
+- LinkedIn: www.linkedin.com/in/BrianGitu
 - Email: ryanchege8@gmail.com
 
 Let's collaborate and leverage the power of data science to drive innovation and create a brighter future together!
