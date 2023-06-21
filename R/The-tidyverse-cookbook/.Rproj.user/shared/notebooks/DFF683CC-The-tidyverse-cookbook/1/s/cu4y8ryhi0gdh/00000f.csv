@@ -1,0 +1,2 @@
+"0","    band_members |> "
+"0","      left_join(band_instruments, by='name')"

@@ -1,0 +1,502 @@
+---
+title: "The Tidyverse Cookbook"
+author: "STATS_SOLUTIONS@ryannthegeek"
+date: last-modified
+date-format: iso
+format:
+  pdf:
+    documentclass: article
+    classoption: [12pt, a4paper, twoside, openright]
+    toc: true
+    toc-title: Contents
+    toc-depth: 4
+    toccolor: blue
+    number-sections: true
+    number-depth: 3
+    lof: true
+    lot: true
+    fig-format: png
+    fig-pos: H
+    urlcolor: purple
+    colorlinks: true
+    linkcolor: purple
+    filecolor: magenta
+    listings: true
+    include-in-header: 
+      - /home/chege/Documents/Data-Science/latex-files/listsetR.tex
+      - /home/chege/Documents/Data-Science/latex-files/contactdets.tex
+    latex-auto-install: true
+    output-file: The Tidyverse Cookbook
+editor: visual
+execute: 
+  warning: false
+  error: false
+  cache: false
+  freeze: auto
+---
+
+```{=tex}
+\cleardoublepage
+\pagenumbering{arabic}
+\pagestyle{fancy}
+```
+::: callout-tip
+**Packages used**
+
+`tidyverse, repurrsive`
+:::
+
+# Program
+
+-   Combine functions into a pipe
+
+```{r}
+require(tidyverse)
+starwars |> 
+  group_by(species) |>  
+  summarise(avg_height = mean(height, na.rm=TRUE)) |>  
+  arrange(avg_height) |> 
+  head()
+```
+
+# Import
+
+When you import data into R, R stores the data in your computer's RAM while you manipulate it. This creates a size limitation: truly big data sets should be stored outside of R in a database or a distributed storage system. You can then create a connection to the system that R can use to access the data without bringing the data into your computer's RAM.
+
+The readr package contains the most common functions in the tidyverse for importing data. The readr package is loaded when you run library(tidyverse). The tidyverse also includes the following packages for importing specific types of data. These are not loaded with library(tidyverse). You must load them individually when you need them.
+
+1.  DBI - connect to databases
+
+2.  haven - read SPSS, Stata, or SAS data
+
+3.  httr - access data over web APIs
+
+4.  jsonlite - read JSON
+
+5.  readxl - read Excel spreadsheets
+
+6.  rvest - scrape data from the web
+
+7.  xml2 - read XML
+
+-   Read a Compressed RDS file
+
+```{r}
+saveRDS(pressure, file="file.RDS")
+
+my_data <- readRDS("file.RDS")
+head(my_data, 3)
+```
+
+-   Read an Excel spreadsheet
+
+```{r}
+require(readxl)
+file_path <- readxl_example('datasets.xlsx')
+my_data <- read_excel(file_path)
+head(my_data, 3)
+```
+
+-   Read a specific sheet from an Excel spreadsheet
+
+```{r}
+my_data <- read_excel(file_path, sheet='chickwts')
+head(my_data, 3)
+```
+
+-   Read a field of cells from an excel spreadsheet
+
+```{r}
+my_data <- read_excel(file_path, range='C1:E4', skip=3, n_max=10)
+head(my_data)
+```
+
+`read_excel()` adopts the skip and \[n_max\]\[Skip lines at the end of a file when reading a file\] arguments of reader functions to skip rows at the top of the spreadsheet and to control how far down the spreadsheet to read. Use the `range` argument to specify a subset of columns to read. Two column names separated by a:\` specifies those two columns and every column between them.
+
+-   Write to a comma-separate values (csv) file
+
+```{r}
+write_csv(iris, file='my_file.csv')
+```
+
+-   Write to a semi-colon delimited file; file that uses semi-colons to delimit cells
+
+```{r}
+write_csv2(iris, file='my_file2.csv')
+```
+
+-   Write to a tab-delimited file
+
+```{r}
+write_tsv(iris, file='my_file3.tsv')
+```
+
+-   Write to a text file with arbitrary delimiters
+
+    You wanna save a tibble of df as a plain text file that uses an unusual delimiter
+
+```{r}
+write_delim(iris, file='my_file4.tsv', delim='|')
+```
+
+-   Write to a compressed RDS file
+
+```{r}
+saveRDS(iris, file='my_file5.RDS')
+```
+
+# Tidy
+
+1.  **Data tidying** refers to *reshaping* your data into a tidy data frame or tibble. Data tidying is an important first step for your analysis because every tidyverse function will expect your data to be stored as Tidy Data.
+
+2.  Tidy data is tabular data organized so that: Each column contains a single variable Each row contains a single observation.
+
+3.  A **variable** is a quantity, quality, or property that you can measure. An **observation** is a set of measurements made under similar conditions (you usually make all of the measurements in an observation at the same time and on the same object)
+
+4.  Tidy data is not an arbitrary requirement of the tidyverse; it is the ideal data format for doing data science with R.
+
+5.  Tidy data makes it easy to extract every value of a variable to build a plot or to compute a summary statistic.
+
+-   **Spread a pair of columns into a field of cells**; **pivot**, **convert long data to wide**, or move variable names out of the cells and into the column names.
+
+    ```{r}
+    head(table2)
+    ```
+
+    For example, `table2` contains `type`, which is a column that repeats the variable names `case` and `population`. To make `table2` tidy, you must move `case` and `population` values into their own columns.
+
+    ```{r}
+    table2 |>  
+      spread(key=type, value=count) |> 
+      head(3)
+    ```
+
+    If you would to convert each new column to the most sensible data type given its final contents, add the argument `convert = TRUE`.
+
+-   **Gather a field of cells into a pair of columns**; **convert wide data to long**, reshape a **two-by-two table**, or move variable values out of the column names and into the cells.
+
+    ```{r}
+    table4a
+    ```
+
+    For example, `table4a` is a two-by-two table with the column names `1999` and `2000`. These names are values of a `year` variable. The field of cells in `table4a` contains counts of TB cases, which is another variable. To make `table4a` tidy, you need to move year and case values into their own columns.
+
+    ```{r}
+    table4a |> 
+      gather(key='year', value='cases', 2:3) # means gather values in column 2:3
+    # you can add convert=T if you want to keep the changes permanently
+    ```
+
+-   Separate a column into new columns
+
+    ```{r}
+    table3
+    ```
+
+    For example, `table3` combines `cases` and `population` values in a single column named `rate`. To tidy `table3`, you need to separate `rate` into two columns: one for the `cases` variable and one for the `population` variable
+
+    ```{r}
+    table3 |> 
+      separate(col=rate, into=c('cases', 'population'),
+               sep='/', convert=TRUE)
+    ```
+
+-   Unite multiple columns into a single column
+
+    ```{r}
+    table5
+    ```
+
+    ```{r}
+    table5 |> 
+      unite(col='year', century, year, sep='')
+    ```
+
+# Transform Tables
+
+-   The `dplyr` package provides the most important tidyverse functions for manipulating tables.
+
+-   `dplyr` functions always return a **transformed** *copy* of your table. They won't change your original table unless you tell them to (by saving over the name of the original table). That's good news, because you should always retain a clean copy of your original data in case something goes wrong.
+
+-   You can refer to columns by name inside of a dplyr function. There's no need for `$` syntax or `""`. Every dplyr function requires you to supply a data frame, and it will recognize the columns in that data frame, e.g.
+
+    `summarise(mpg, h = mean(hwy), c = mean(cty))`
+
+    This only becomes a problem if you'd like to use an object that has the same name as one of the columns in the data frame. In this case, place `!!` before the object's name to unquote it, `dplyr` will skip the columns when looking up the object. e.g.
+
+    `hwy <- 1:10`\
+    `summarise(mpg, h = mean(!!hwy), c = mean(cty))`
+
+-   Transforming a table sometimes requires more than one recipe. Why? Because tables are made of multiple data structures that work together:
+
+    1.  The table itself is a data frame or tibble.
+
+    2.  The columns of the table are vectors.
+
+    3.  Some columns may be list-columns, which are lists that contain vectors.
+
+-   So to transform a table, begin with a recipe that transforms the structure of the table. You'll find those recipes in this chapter. Then complete it with a recipe that transforms the actual data values in your table. The [Combine transform recipes](https://rstudio-education.github.io/tidyverse-cookbook/transform-tables.html#combine-transform-recipes) recipe will show you how.
+
+-   Arrange rows by value in ascending order
+
+    ```{r}
+    mpg |> 
+      arrange(displ) |> 
+      head()
+    ```
+
+    If you provide additional column names, `arrange()` will use the additional columns in order as tiebreakers to sort within rows that share the same value of the first column.
+
+    ```{r}
+    mpg |> 
+      arrange(displ, cty) |> 
+      head()
+    ```
+
+-   Arrange rows by value in descending order
+
+    ```{r}
+    mpg |> 
+      arrange(desc(displ)) |> 
+      head()
+    ```
+
+    You can use `desc()` for tie-breaker columns as well
+
+    ```{r}
+    mpg |> 
+      arrange(desc(displ), desc(cty)) |> 
+      head()
+    ```
+
+-   Filter rows with a logical test
+
+    ```{r}
+    mpg |> 
+      filter(model == 'jetta') |> 
+      head(3)
+    ```
+
+-   FIlter rows with more than one logical test
+
+    ```{r}
+    mpg |> 
+      filter(model=='jetta', year==1999) |> 
+      head(3)
+    ```
+
+-   Select columns by name
+
+    ```{r}
+    table1 |> 
+      select(country, year, cases) |> 
+      head(3)
+    ```
+
+-   Drop columns by name
+
+    ```{r}
+    table1 |> 
+      select(-c(population, year)) |> 
+      head(3)
+    ```
+
+-   Select a range of columns
+
+    ```{r}
+    table1 |> 
+      select(country:cases) |> 
+      head(3)
+    ```
+
+-   Select columns by integer position
+
+    ```{r}
+    table1 |> 
+      select(1, 2, 4) |> 
+      head(3)
+    ```
+
+-   Select columns by start of name
+
+    ```{r}
+    table1 |> 
+      select(starts_with('c')) |> 
+      head(3)
+    ```
+
+-   Select columns by end of name
+
+    ```{r}
+    table1 |> 
+      select(ends_with('tion')) |> 
+      head(3)
+    ```
+
+-   Select columns by string in name; to return every column whose name contains a specific string or regular expression
+
+    ```{r}
+    table1 |> 
+      select(matches('o.*u')) |> 
+      head(3)
+    ```
+
+-   Reorder columns
+
+    ```{r}
+    table1 |> 
+      select(country, year, population, cases) |> 
+      head(3)
+    ```
+
+-   Reorder specific columns and leave the rest to order anyhow
+
+    ```{r}
+    table1 |> 
+      select(country, year, everything()) |> 
+      head(3)
+    ```
+
+-   Rename Columns
+
+    ```{r}
+    table1 |> 
+      rename(state=country, date=year) |> # new name=old name
+      head(3)
+    ```
+
+-   Return the contents of a column as a vector
+
+    ```{r}
+    table1 |> 
+      pull(cases)
+    ```
+
+    You can also pull integer position
+
+    ```{r}
+    table1 |> 
+      pull(3)
+    ```
+
+-   Mutate data (Add new variables)
+
+    ```{r}
+    table1 |> 
+      mutate(rate = cases/population, percentage = rate*100) |> 
+      head(3)
+    ```
+
+-   **Dropping the original data**; to return only new columns that `mutate()` would create
+
+    ```{r}
+    table1 |> 
+      transmute(rate = cases/population, percentage = rate*100) |> 
+      head(3)
+    ```
+
+-   **Summarise data**; to compute summary statistics
+
+    ```{r}
+    table1 |> 
+      summarise(total_cases = sum(cases), max_rate = max(cases/population))
+    ```
+
+-   Group data
+
+    ```{r}
+    table1 |> 
+      group_by(country)
+    ```
+
+-   Summarise data by groups
+
+    ```{r}
+    table1 |> 
+      group_by(country) |> 
+      summarise(total_cases = sum(cases), max_rate = max(cases/population))
+    ```
+
+-   **Nest a data frame**; to move portions of your data frame into their own tables, and then store those tables in cells in your original data frame.
+
+    ```{r}
+    nested_iris <- iris |> 
+      group_by(Species) |> 
+      nest(.key='Measurements') |> # key for providing name for new list column
+      as_tibble()
+
+    nested_iris
+    ```
+
+    `nest()` preserves class, which means that `nest()` will return a data frame if its input is a data frame and a tibble if its input is a tibble so it is recommend that you convert the result of `nest()` to a tibble when necessary.
+
+-   Extract a table from a nested dataframe
+
+    ```{r}
+    nested_iris |> 
+      filter(Species == 'setosa') |> 
+      unnest(cols=Measurements)
+    ```
+
+-   Unnest a dataframe
+
+    ```{r}
+    nested_iris |> unnest(cols=Measurements) |> head(3)
+    ```
+
+-   Join datasets by common column(s)
+
+    For example, you would like to combine `band_members` and `band_instruments` into a single data frame based on the values of the `name` column.
+
+    ```{r}
+    print(band_members)
+    print(band_instruments)
+    ```
+
+    ```{r}
+    band_members |> 
+      left_join(band_instruments, by='name')
+    ```
+
+    There are four ways to join contenct from one data frame to another:
+
+    `left_join()` drops any row in the *second* data set does not match a row in the first data set.
+
+    `right_join()` drops any row in the *first* data set does not match a row in the first data set.
+
+    `inner_join()` drops any row in *either* data set that does not have a match in both data sets
+
+    `full_join()` retains every row from both data sets; it is the only join guaranteed to retain all of the original data.
+
+-   Specifying column(s) to join on
+
+    ```{r}
+    table1 |> 
+      left_join(table3, by=c('country', 'year'))
+    ```
+
+-   Find rows that have a match in another data set
+
+    ```{r}
+    band_members |> 
+      semi_join(band_instruments, by='name') # returns only the rows of the first df that have a match(refering to same observation even if diff measurements) in the second df
+    ```
+
+-   Find rows that do not have a match in another data set
+
+    ```{r}
+    band_members |> 
+      anti_join(band_instruments, by='name') # returns only the rows of the first data frame that do not have a match in the second data frame
+    ```
+
+# Transform Lists and Vectors
+
+-   Extract an element from a list
+
+    ```{r}
+    state.center |> pluck('x') # returns element named x in state.center
+    ```
+
+    ```{r}
+
+    ```

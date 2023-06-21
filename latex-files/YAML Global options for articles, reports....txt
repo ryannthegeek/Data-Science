@@ -1,0 +1,44 @@
+---
+title: "Quarto Learning"
+author: "Chege G.B"
+date: last-modified
+date-format: iso
+format:
+  pdf:
+    documentclass: article
+    classoption: [12pt, a4paper, twoside, openright]
+    geometry:
+      - includehead
+      - includefoot
+      - top=25mm
+      - left=25mm
+      - heightrounded
+    toc: true
+    toc-title: Contents
+    toc-depth: 4
+    toccolor: blue
+    number-sections: true
+    number-depth: 3
+    lof: true
+    lot: true
+    fig-format: png
+    fig-pos: H
+    urlcolor: purple
+    colorlinks: true
+    linkcolor: purple
+    filecolor: magenta
+    listings: true
+    include-in-header: 
+      - D:\Chege Learners' Hub\R\quarto learning\listset.tex
+      - D:\Chege Learners' Hub\R\quarto learning\contactdets.tex
+    latex-auto-install: true
+    cite-method: biblatex
+editor: visual
+execute: 
+  warning: false
+  error: false
+  cache: false
+
+  html:
+    ti
+---

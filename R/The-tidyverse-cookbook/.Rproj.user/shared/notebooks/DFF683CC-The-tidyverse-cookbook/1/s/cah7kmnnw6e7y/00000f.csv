@@ -1,0 +1,3 @@
+"0","    table3 |> "
+"0","      separate(col=rate, into=c('cases', 'population'),"
+"0","               sep='/', convert=TRUE)"

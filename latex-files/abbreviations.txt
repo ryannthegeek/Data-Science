@@ -1,0 +1,16 @@
+ATM At The Money
+BMM Block Maxima Method
+BSM Black Scholes Model
+CBOE Chicago Boards Options Exchange
+CMX Commodity Exchange of India
+EVT Extreme Value Theory
+GEV Generalized Extreme Value distribution
+GPD Generalized Pareto Distribution
+ITM In The Money
+NSE National Stock Exchange of India
+OTC Over The Counter
+POT Peak Over Threshold
+RMSE Root Mean Squared Error
+RND Risk Neutral Density
+SDE Stochastic Differential Equation
+USD United States Dollars

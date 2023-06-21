@@ -1,0 +1,6 @@
+"0","require(readxl)"
+"2","Loading required package: readxl
+"
+"0","file_path <- readxl_example('datasets.xlsx')"
+"0","my_data <- read_excel(file_path)"
+"0","head(my_data, 3)"

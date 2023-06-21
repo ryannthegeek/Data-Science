@@ -1,0 +1,3 @@
+"0","    table2 |>  "
+"0","      spread(key=type, value=count) |> "
+"0","      head(3)"

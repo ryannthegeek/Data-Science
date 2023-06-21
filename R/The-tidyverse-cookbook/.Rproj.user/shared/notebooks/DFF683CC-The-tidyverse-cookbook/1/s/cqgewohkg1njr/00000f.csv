@@ -1,0 +1,2 @@
+"0","    table5 |> "
+"0","      unite(col='year', century, year, sep='')"

@@ -1,0 +1,6 @@
+"0","    nested_iris <- iris |> "
+"0","      group_by(Species) |> "
+"0","      nest(.key='Measurements') |> # key for providing name for new list column"
+"0","      as_tibble()"
+"0",""
+"0","    nested_iris"

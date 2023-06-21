@@ -1,0 +1,21 @@
+\documentclass{article}
+
+\usepackage{listings}
+\usepackage{xcolor,showframe}
+\usepackage{soul}
+\usepackage{realboxes}
+\lstdefinestyle{ShellCmd}{
+	language=bash,
+	basicstyle=\small\ttfamily,
+	backgroundcolor=\color{gray!10},
+	linewidth=0.9\linewidth,
+	breaklines=true
+}
+
+\newcommand\shellthree[1]{\Colorbox{gray!10}{\parbox[t]{\textwidth}{\lstinline[style=ShellCmd,mathescape]`#1`}}}
+\newcommand{\sh}[1]{\colorbox{gray!10}{\lstinline[style=ShellCmd]}}
+
+\begin{document} 
+	
+	
+\end{document}

@@ -1,0 +1,2 @@
+"0","    table1 |> "
+"0","      left_join(table3, by=c('country', 'year'))"

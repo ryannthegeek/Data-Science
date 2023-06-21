@@ -1,0 +1,3 @@
+"0","    table1 |> "
+"0","      select(-c(population, year)) |> "
+"0","      head(3)"

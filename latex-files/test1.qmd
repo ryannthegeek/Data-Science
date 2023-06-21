@@ -1,0 +1,68 @@
+---
+title: "Quarto Learning"
+author: "Chege G.B"
+date: last-modified
+date-format: iso
+format:
+  pdf:
+    pdf-engine: lualatex
+    documentclass: article
+    classoption: [12pt, a4paper, twoside, openright]
+    geometry: 
+      - top=20mm
+      - left=20mm
+      - heightrounded
+    toc: true
+    toc-title: Contents
+    toc-depth: 4
+    toccolor: blue
+    number-sections: true
+    number-depth: 3
+    lof: true
+    lot: true
+    urlcolor: purple
+    colorlinks: true
+    linkcolor: purple
+    filecolor: magenta
+    listings: true
+    include-in-header: 
+      - D:\Chege Learners' Hub\R\quarto learning\listset.tex
+      - D:\Chege Learners' Hub\R\quarto learning\contactdets.tex
+    latex-auto-install: true
+editor: visual
+execute: 
+  warning: false
+  error: false
+  cache: false
+---
+
+# Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+The option disables the printing of code (only output is displayed).
+
+```{r}
+x <- 1:5
+print(x)
+ls() ## lists objects formed
+rm(x) ## remove objects formed
+```
+
+Text in the default font. \textcolor{blue}{\jbfont{Text in the new font.}} Again tex
+
+::: callout-tip
+## **Packages used in this chapter**
+
+\jbfont{TSstudio, lubridate, forecast.}
+:::
+
+```{python}
+print("Today")
+import numpy as np
+
+```

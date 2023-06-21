@@ -1,0 +1,14 @@
+####                                                 ALL ABOUT CONDA
+conda update -n base -c defaults conda
+
+####                                                 GET ACCESS TO ROOT
+in dolphin click top menu > configure > configure dolphin > context menu > add new service > search for 'open as root'
+
+####                                                 PERMANENTLY DELETE A FOLDER
+rm -r <folder_name>
+
+####                                                 CREATING NEW CONDA ENV AND INSTALL TENSORFLOW
+conda create --name tf numpy pandas seaborn scipy scikit-learn
+
+####                                                 STARTING LT SERVER
+java -cp languagetool-server.jar org.languagetool.server.HTTPServer --port 8081 --allow-origin

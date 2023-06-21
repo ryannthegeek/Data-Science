@@ -1,0 +1,52 @@
+---
+title: "This is the Main Title"
+subtitle: "This is a Subtitle"
+author: "client client"
+date: "2023-02-02"
+format:
+  docx: 
+    reference-doc: custom-reference-doc.docx
+bibliography: reference.bib
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+## Equation {#sec-equation}
+
+$$
+s = \sqrt{\frac{1}{N-1} \sum_{i=1}^N (x_i - \overline{x})^2}
+$$
+
+When it is like @li2017mean and @knuth84 it is always bad.
+
+```{r}
+1 + 1
+
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+$E = mc^{2}$
+
+To refer to @sec-equation, it is correct.
+
+# Appendix: All code for this report
+
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+```
+
+## References

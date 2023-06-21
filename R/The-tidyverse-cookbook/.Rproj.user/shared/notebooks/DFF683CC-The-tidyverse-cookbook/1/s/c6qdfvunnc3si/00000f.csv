@@ -1,0 +1,2 @@
+"0","    table1 |> "
+"0","      summarise(total_cases = sum(cases), max_rate = max(cases/population))"

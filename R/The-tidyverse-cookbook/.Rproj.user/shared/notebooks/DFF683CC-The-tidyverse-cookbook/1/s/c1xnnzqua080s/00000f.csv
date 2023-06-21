@@ -1,0 +1,3 @@
+"0","    table1 |> "
+"0","      transmute(rate = cases/population, percentage = rate*100) |> "
+"0","      head(3)"

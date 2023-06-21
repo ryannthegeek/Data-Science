@@ -1,0 +1,173 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 23.1) (preloaded format=pdflatex 2023.2.17)  27 FEB 2023 17:36
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**"./another for test.tex"
+(another for test.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-02-02>
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+\lst@mode=\count193
+\lst@gtempboxa=\box51
+\lst@token=\toks17
+\lst@length=\count194
+\lst@currlwidth=\dimen141
+\lst@column=\count195
+\lst@pos=\count196
+\lst@lostspace=\dimen142
+\lst@width=\dimen143
+\lst@newlines=\count197
+\lst@lineno=\count198
+\lst@maxwidth=\dimen144
+
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count199
+\lst@skipnumbers=\count266
+\lst@framebox=\box52
+)
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+)
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+) (C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\showframe.sty
+Package: showframe 2020/10/14 v0.1j showframe (new impl., RN)
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
+Package: eso-pic 2020/10/14 v3.0a eso-pic (RN)
+\ESO@tempdima=\dimen145
+\ESO@tempdimb=\dimen146
+)
+\SF@tempdima=\dimen147
+)
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/generic/soul\soul.sty
+Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
+\SOUL@word=\toks18
+\SOUL@lasttoken=\toks19
+\SOUL@cmds=\toks20
+\SOUL@buffer=\toks21
+\SOUL@token=\toks22
+\SOUL@spaceskip=\skip50
+\SOUL@ttwidth=\dimen148
+\SOUL@uldp=\dimen149
+\SOUL@ulht=\dimen150
+)
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/realboxes\realboxes.sty
+Package: realboxes 2011/08/08 v0.2 Change box commands to read there content as
+ real boxes
+
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/collectbox\collectbox.s
+ty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box53
+)
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
+\XKV@toks=\toks23
+\XKV@tempa@toks=\toks24
+)
+\XKV@depth=\count267
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))))
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count268
+\l__pdf_internal_box=\box54
+) (another for test.aux)
+\openout1 = `"another for test.aux"'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+\c@lstlisting=\count269
+
+(C:\Users\ryanc\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count270
+\scratchdimen=\dimen151
+\scratchbox=\box55
+\nofMPsegments=\count271
+\nofMParguments=\count272
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count273
+\MPscratchDim=\dimen152
+\MPnumerator=\count274
+\makeMPintoPDFobject=\count275
+\everyMPtoPDFconversion=\toks26
+) (another for test.aux) ) 
+Here is how much of TeX's memory you used:
+ 3589 strings out of 476374
+ 55800 string characters out of 5788854
+ 1849340 words of memory out of 5000000
+ 23993 multiletter control sequences out of 15000+600000
+ 512600 words of font info for 33 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 58i,1n,62p,235b,262s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+No pages of output.
+PDF statistics:
+ 0 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

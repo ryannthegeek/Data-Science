@@ -1,0 +1,11 @@
+###                                                DIRECTORIES TO CHANGE WHEN TRYING TO RUN ON DIFFERENT PLATFORM
+1. contactdets: \graphicspath{{<directory to your graphics>}}
+
+2. listsetR: \graphicspath{{<directory to your graphics>}}
+
+3. listsetP: \graphicspath{{<directory to your graphics>}}
+
+4. YAML options :     include-in-header:
+                        - <path/to/>listsetR.tex
+                        - <path/to/>contactdets.tex
+

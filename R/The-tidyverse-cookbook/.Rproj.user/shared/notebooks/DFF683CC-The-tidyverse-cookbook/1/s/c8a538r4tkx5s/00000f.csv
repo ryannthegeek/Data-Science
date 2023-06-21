@@ -1,0 +1,2 @@
+"0","    table4a |> "
+"0","      gather(key='year', value='cases', 2:3) # means gather values in column 2:3"

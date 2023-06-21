@@ -1,0 +1,39 @@
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+%\usepackage{lastpage}
+\usepackage{pageslts}
+\usepackage{array}
+\usepackage[export]{adjustbox}
+\usepackage{marvosym}
+\usepackage{hyperref}
+%\usepackage[Sonny]{fncychap}
+%\usepackage{wasysym} For use with \phone
+\usepackage{graphicx}
+\graphicspath{{/home/chege/Documents/Data-Science/latex-files/}}
+\usepackage{emptypage}
+\usepackage[nottoc]{tocbibind}
+\usepackage[top=20mm,left=20mm,heightrounded]{geometry}
+%\usepackage[top=1in,bottom=1in,left=3.2cm,right=2.6cm]{geometry}
+
+\pagenumbering{roman}
+\pagestyle{plain}
+%\pagestyle{fancy}
+\fancyhead[L]{\scriptsize{\textsc{\nouppercase\leftmark}}}% LE -> Left part on Even pages
+%\fancyhead[RO]{\nouppercase\rightmark}% RO -> Right part on Odd pages
+
+%\usepackage{blindtext}% dummy text
+\fancyhead[R]{}
+\fancyfoot[L]{\scriptsize{
+	\includegraphics[height=5ex,valign=m]{co-logo-final} \textcolor{blue}{\textbf{STATS\_SOLUTIONS}}@ryannthegeek \\
+	\includegraphics[height=3ex,valign=m]{fiverr} \href{https://www.fiverr.com/ryannthegeek}{https://www.fiverr.com/ryannthegeek} \\
+	\includegraphics[height=3ex,valign=m]{gmail} \href{ryanchege8@gmail.com}{ryanchege8@gmail.com} \\
+%	\includegraphics[height=3ex,valign=m]{contact} +254 798 731108 \\
+	\copyright \hspace{1mm} 2023 Chege G.B
+}
+} 
+%\fancyfoot[R]{\copyright \hspace{1mm} 2023 Chege G.B}
+\fancyfoot[C]{}
+%\fancyfoot[R]{\scriptsize{Page \thepage \hspace{1pt} of \pageref{LastPage}}}
+\fancyfoot[R]{\theCurrentPageLocal \hspace{1pt} of \pageref{LastPage}}
+\renewcommand{\footrulewidth}{0.4pt} % Default is 0pt
+

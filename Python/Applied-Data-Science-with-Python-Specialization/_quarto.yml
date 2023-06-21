@@ -1,0 +1,52 @@
+project:
+  type: book
+
+book:
+  title: Applied Data Science with Python Specialization
+  author: \textcolor{blue}{\textbf{STATS\_SOLUTIONS}}@ryannthegeek
+  date: last-modified
+  date-format: iso
+  chapters:
+    - index.qmd
+    - 01_Introduction_to_Data_Science_in_Python.ipynb
+
+
+
+
+
+format:  
+  pdf:
+    documentclass: report
+    classoption: [12pt, a4paper, oneside, openright]
+    toc: true
+    toc-title: Contents
+    toc-depth: 4
+    toccolor: blue
+    number-sections: true
+    number-depth: 3
+    lof: true
+    lot: true
+    fig-format: png
+    fig-pos: H
+    urlcolor: purple
+    colorlinks: true
+    linkcolor: blue
+    filecolor: magenta
+    citecolor: blue
+    link-citations: true
+    listings: true
+    include-in-header: 
+      - /home/chege/Documents/Data-Science/latex-files/listsetP.tex
+      - /home/chege/Documents/Data-Science/latex-files/contactdets.tex
+    latex-auto-install: true
+    output-file: Applied Data Science with Python Specialization
+
+jupyter: python3
+execute:
+  warning: false
+  error: false
+  cache: false
+  freeze: auto
+
+
+

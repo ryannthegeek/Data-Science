@@ -1,0 +1,3 @@
+"0","    table1 |> "
+"0","      rename(state=country, date=year) |> # new name=old name"
+"0","      head(3)"

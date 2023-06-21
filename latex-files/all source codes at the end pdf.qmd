@@ -1,0 +1,68 @@
+---
+title: "Essentials For R Programming"
+author: "ryannthegeek"
+date: last-modified
+date-format: iso
+format:
+  pdf:
+    documentclass: article
+    classoption: [12pt, a4paper, twoside, openright]
+    toc: true
+    toc-title: Contents
+    toc-depth: 4
+    toccolor: blue
+    number-sections: true
+    number-depth: 3
+    lof: true
+    lot: true
+    fig-format: png
+    fig-pos: H
+    urlcolor: purple
+    colorlinks: true
+    linkcolor: purple
+    filecolor: magenta
+    listings: true
+    include-in-header: 
+      - D:\Chege Learners' Hub\R\quarto learning\listset.tex
+      - D:\Chege Learners' Hub\R\quarto learning\contactdets.tex
+    latex-auto-install: true
+    output-file: all source codes at the end pdf
+editor: visual
+execute: 
+  warning: false
+  error: false
+  cache: false
+  echo: false
+  output: false
+---
+
+```{=tex}
+\pagenumbering{arabic}
+\pagestyle{fancy}
+```
+# Introduction and Preliminaries
+
+```{r}
+x <- 1:5
+ls() ## lists objects formed
+rm(x) ## remove objects formed
+```
+
+# Simple Manipulations; Numbers and Vectors
+
+To set up a vector named x consisting of five numbers, namely $10.4, 5.6, 3.1, 6.4$ and $21.7$, use the R command
+
+```{r}
+x <- c(10.4, 5.6, 3.1, 6.4, 21.7)
+```
+
+Assignment can also be made using the function `assign()`. An equivalent way of making the same assignment as above is with:
+
+```{r}
+assign("x", c(10.4, 5.6, 3.1, 6.4, 21.7))
+```
+
+# Appendix: All code for this report
+
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+```

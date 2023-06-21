@@ -1,0 +1,58 @@
+---
+title: "All source codes at the end of word"
+author: "ryannthegeek"
+date: last-modified
+date-format: iso
+format:
+  docx:
+    toc: true
+    toc-title: Contents
+    toc-depth: 4
+    number-sections: true
+    number-depth: 3
+    fig-format: png
+    fig-align: center
+    output-file: all source codes at the end word
+editor: visual
+execute: 
+  warning: false
+  error: false
+  cache: false
+  echo: false
+  output: false
+---
+
+# Introduction and Preliminaries
+
+```{r}
+x <- 1:5
+ls() ## lists objects formed
+rm(x) ## remove objects formed
+```
+
+# Simple Manipulations; Numbers and Vectors
+
+To set up a vector named x consisting of five numbers, namely $10.4, 5.6, 3.1, 6.4$ and $21.7$, use the R command
+
+```{r}
+x <- c(10.4, 5.6, 3.1, 6.4, 21.7)
+```
+
+Assignment can also be made using the function `assign()`. An equivalent way of making the same assignment as above is with:
+
+```{r}
+assign("x", c(10.4, 5.6, 3.1, 6.4, 21.7))
+```
+
+# Appendix: All code for this report
+
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+```
+
+$$
+\begin{equation}
+        C_{t} e^{r(T-t)} =\frac{1}{\xi}\left[\frac{S_{t} \sigma}{\xi} \psi_{1}-\left(S_{t}\left(1-  \mu+\frac{\sigma}{\xi}\right)-K\right) \psi_{2}\right]
+\end{equation}
+$$ {#eq-ryan}
+
+Today we according to today.

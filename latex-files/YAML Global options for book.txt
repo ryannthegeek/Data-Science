@@ -1,0 +1,62 @@
+project:
+  type: book
+  execute-dir: project
+
+book:
+  title: "Time Series Analysis in R"
+  author: "ryannthegeek"
+  date: last-modified
+  date-format: iso
+  chapters:
+    - index.qmd
+    - 1_introduction.qmd
+    - 2_dates_and_times.qmd
+    - 3_the_time_series_object.qmd
+    - 4_zoo_and_xts_objects.qmd
+    - 5_decomposition_of_time_series.qmd
+    - 8_forecasting_strategies.qmd
+    - 9_forecasting_with_linear_regression.qmd
+    - 10_forecasting_with_moving_average_models.qmd
+    - 11_forecasting_with_exponential_smoothing.qmd
+    - references.qmd
+    
+    
+  appendices: 
+    - EVT-POT_in_practice_with_R.qmd
+
+
+bibliography: references.bib
+
+format:
+  pdf:
+    documentclass: report
+    classoption: [12pt, a4paper, oneside, openright]
+    toc: true
+    toc-title: Contents
+    toc-depth: 4
+    toccolor: blue
+    number-sections: true
+    number-depth: 3
+    lof: true
+    lot: true
+    fig-format: png
+    fig-pos: H
+    urlcolor: purple
+    colorlinks: true
+    linkcolor: blue
+    filecolor: magenta
+    citecolor: blue
+    link-citations: true
+    listings: true
+    include-in-header: 
+      - D:\Chege Learners' Hub\R\quarto learning\listset.tex
+      - D:\Chege Learners' Hub\R\quarto learning\contactdets.tex
+    latex-auto-install: true
+
+editor: visual
+execute:
+  warning: false
+  error: false
+  cache: false
+  freeze: auto
+
