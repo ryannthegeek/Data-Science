@@ -1,9 +1,0 @@
-# Preface {.unnumbered}
-
-This is the first edition of *Data Analysis with Python Book* by Chege G.B as \textcolor{blue}{\textbf{STATS\_SOLUTIONS}}@ryannthegeek.
-
-```{=tex}
-\cleardoublepage
-\pagenumbering{arabic}
-\pagestyle{fancy}
-```

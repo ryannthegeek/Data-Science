@@ -1,7 +1,0 @@
-# After making changes
-
-git add .    # to add all changes you've made
-
-git commit -m "message you'd like to show as a checkpoint" # commit changes
-
-git push origin main # update the online git repo
