@@ -28,5 +28,6 @@ I'm always eager to connect with fellow data enthusiasts, industry professionals
 
 - Upwork: https://www.upwork.com/freelancers/~016e9dd4482144110a
 - LinkedIn: www.linkedin.com/in/BrianGitu
-- Email: ryanchege8@gmail.com
+- Email: gitubrian25@protonmail.com
+
 
