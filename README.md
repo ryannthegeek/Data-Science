@@ -1,4 +1,4 @@
-## Data Scientist | Python | R | SQL | Power BI | Statistics
+## Actuarial and Data Analytics Professional | Python | R | SQL | Power BI | Statistics
 
 Welcome to my GitHub repository! Here you will find a collection of projects that showcase my expertise as a data scientist, highlighting my skills in Python, R, SQL, Power BI, and statistical analysis. I hold a bachelor's degree in Actuarial Science, providing a solid foundation in mathematical modeling and risk assessment.
 
@@ -29,3 +29,4 @@ I'm always eager to connect with fellow data enthusiasts, industry professionals
 - Upwork: https://www.upwork.com/freelancers/~016e9dd4482144110a
 - LinkedIn: www.linkedin.com/in/BrianGitu
 - Email: ryanchege8@gmail.com
+
